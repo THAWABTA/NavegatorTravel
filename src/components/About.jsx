@@ -994,7 +994,7 @@ const About = () => {
     })();
 
     // ── Grow lines ────────────────────────────────────────────────────────
-    root.querySelectorAll('.grow-line').forEach(el => {
+    root.querySelectorAll('.grow-line-right').forEach(el => {
       if (el.dataset.lineReady) return;
       el.dataset.lineReady = '1';
       gsap.fromTo(el,
@@ -1025,7 +1025,7 @@ const About = () => {
               <span className="grow-line-glow" />
             </div>
             <span data-text-eyebrow className="display-font italic text-[var(--accent)] text-sm tracking-widest">ABOUT Navigator</span>
-            <div className="grow-line h-[1px]" style={{ width: 0, background: 'var(--accent)' }} />
+            <div className="grow-line-right h-[1px]" style={{ width: 0, background: 'var(--accent)' }} />
           </div>
           <p data-text-heading className="display-font text-[clamp(2.6rem,7vw,6rem)] font-light leading-[1.08] text-[var(--ink)]">
             The world was never meant to be seen <span className="italic">through a screen.</span>
