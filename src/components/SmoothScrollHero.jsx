@@ -380,12 +380,12 @@ const SmoothScrollHero = () => {
                 tabIndex={-1}
               />
               {/* Atmospheric shadow / depth */}
-              <Image src={shadowImage} alt="shadow" fill className="object-cover scale-100 lg:scale-[1.3] opacity-50 z-20" quality={100} style={{ transform: 'translateZ(0)', backfaceVisibility: 'hidden' }} unoptimized />
+              <Image src={shadowImage} priority={true} alt="shadow" fill className="object-cover scale-100 lg:scale-[1.3] opacity-50 z-20" quality={100} style={{ transform: 'translateZ(0)', backfaceVisibility: 'hidden' }} unoptimized />
               {/* Window frame outer */}
-              <Image src={outerImage} alt="window frame" fill className="object-cover scale-100 lg:scale-[1.3] z-30" quality={100} style={{ transform: 'translateZ(0)', backfaceVisibility: 'hidden' }} unoptimized />
+              <Image src={outerImage} priority={true} alt="window frame" fill className="object-cover scale-100 lg:scale-[1.3] z-30" quality={100} style={{ transform: 'translateZ(0)', backfaceVisibility: 'hidden' }} unoptimized />
               {/* Window top fixture */}
               <div className="absolute top-[22.5%] left-[50%] md:top-[10%] md:left-[50.3%] -translate-x-1/2 h-auto z-10" style={{ width: 'clamp(120px, 24vw, 50%)' }}>
-                <Image src={aboveImage} alt="window top" width={400} height={200} className="object-contain" quality={100} unoptimized />
+                <Image src={aboveImage} priority={true} alt="window top" width={400} height={200} className="object-contain" quality={100} unoptimized />
               </div>
             </div>
           </div>
