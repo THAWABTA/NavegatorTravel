@@ -321,7 +321,7 @@ export default function ConciergeSection() {
             <button
               ref={btn1Ref}
               type="button"
-              className="cc-btn cc-btn--primary"
+              className="cc-btn cc-btn--primary self-start"
               onClick={openDrawer}
             >
               <span className="cc-btn-text">Begin Your Journey</span>
