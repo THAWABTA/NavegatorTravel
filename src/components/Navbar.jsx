@@ -132,7 +132,7 @@ const Navbar = () => {
         <div className="flex md:hidden flex-col items-start gap-2">
           <button 
             onClick={() => setIsOpen(!isOpen)}
-            className="glass-capsule flex items-center justify-center w-12 h-12 !p-0 hover:bg-[var(--nav-hover-bg)] transition-colors"
+            className="glass-capsule btn-ui-icon !p-0 hover:bg-[var(--nav-hover-bg)]"
             aria-label="Toggle Menu"
           >
             {isOpen ? <X size={18} color="var(--nav-text)" /> : <Menu size={18} color="var(--nav-text)" />}
@@ -147,7 +147,7 @@ const Navbar = () => {
                     key={l.text}
                     href={l.href}
                     onClick={() => setIsOpen(false)}
-                    className={`glass-nav-item w-full text-left !px-4 !py-3 ${isActive ? "is-active" : ""}`}
+                    className={`glass-nav-item w-full text-left !px-6 !py-3 ${isActive ? "is-active" : ""}`}
                   >
                     {l.text}
                   </a>

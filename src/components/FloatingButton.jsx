@@ -12,7 +12,7 @@ const FloatingButton = () => {
   return visible ? (
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-      className="fixed z-[500] flex items-center justify-center bg-[var(--accent)] text-white hover:bg-[var(--accent-soft)] transition-colors duration-300 shadow-lg rounded-full w-12 h-12"
+      className="fixed z-[500] btn-ui-icon bg-[var(--accent)] text-white hover:bg-[var(--accent-soft)] shadow-lg"
       style={{ bottom: 'clamp(1rem, 3vw, 2rem)', right: 'clamp(1rem, 3vw, 2rem)' }}
     >
       <ArrowUp size={18} />

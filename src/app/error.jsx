@@ -24,13 +24,13 @@ export default function Error({ error, reset }) {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
           <button
             onClick={() => reset()}
-            className="px-8 py-4 bg-white text-black text-sm uppercase tracking-widest hover:bg-gray-200 transition-colors duration-300 w-full sm:w-auto"
+            className="btn-sys-solid w-full sm:w-auto"
           >
             Try Again
           </button>
           <Link
             href="/"
-            className="px-8 py-4 border border-gray-600 text-white text-sm uppercase tracking-widest hover:border-white transition-colors duration-300 w-full sm:w-auto"
+            className="btn-sys-outline w-full sm:w-auto"
           >
             Back to Home
           </Link>

@@ -1,5 +1,6 @@
 import "./globals.css";
 import LenisProvider from "./providers/LenisProvider";
+import DebugMeasurer from "@/components/DebugMeasurer";
 
 export const metadata = {
   metadataBase: new URL("https://yourdomain.com"), // TODO: set real production domain
@@ -50,6 +51,7 @@ export default function RootLayout({ children }) {
       <body className="antialiased">
         <LenisProvider>
           {children}
+          <DebugMeasurer />
         </LenisProvider>
       </body>
     </html>

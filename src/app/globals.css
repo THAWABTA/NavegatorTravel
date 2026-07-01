@@ -373,8 +373,22 @@ img, video {
     display: none !important;
   }
 }
+@layer components {
+  .btn-sys-solid {
+    @apply px-8 py-4 bg-white text-black text-sm uppercase tracking-widest hover:bg-gray-200 transition-colors duration-300;
+  }
+  .btn-sys-outline {
+    @apply px-8 py-4 border border-gray-600 text-white text-sm uppercase tracking-widest hover:border-white transition-colors duration-300;
+  }
 
-@layer components;
+  .btn-ui-cta {
+    @apply inline-flex items-center justify-center gap-3 px-8 py-4 transition-colors duration-300 cursor-pointer;
+  }
+  
+  .btn-ui-icon {
+    @apply flex items-center justify-center w-12 h-12 p-0 rounded-full transition-colors duration-300 cursor-pointer;
+  }
+}
 
 @layer utilities {
   .pointer-events-auto {
