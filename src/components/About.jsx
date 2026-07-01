@@ -1152,8 +1152,8 @@ const About = () => {
                     <span>{d.name}</span>
                   </h3>
                   <p data-text-body className="text-sm text-[var(--ink-soft)] leading-7 font-light max-w-sm">{d.desc}</p>
-                  <button className={`chapter-btn mt-2 inline-flex items-center gap-3 px-7 py-3.5 border border-[var(--line)] text-[var(--ink)] text-[11px] tracking-[0.15em] uppercase font-medium transition-colors duration-300 hover:border-[var(--accent)] hover:text-[var(--accent)] ${reversed ? 'lg:self-end' : 'self-start'}`}>
-                    Explore Destination <ArrowUpRight size={14} />
+                  <button className={`chapter-btn mt-2 inline-flex items-center gap-3 px-8 py-4 border border-[var(--line)] text-[var(--ink)] text-[11px] tracking-[0.15em] uppercase font-medium transition-colors duration-300 hover:border-[var(--accent)] hover:text-[var(--accent)] ${reversed ? 'lg:self-end' : 'self-start'}`}>
+                    Explore Destination <ArrowUpRight size={16} />
                   </button>
                 </div>
                 <div
@@ -1217,11 +1217,11 @@ const About = () => {
               ))}
             </div>
             <div className="flex items-center justify-end gap-3">
-              <button aria-label="Previous Slide" className="w-10 h-10 rounded-full border border-[var(--line)] flex items-center justify-center text-[var(--ink)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors">
-                <ChevronLeft size={16} />
+              <button aria-label="Previous Slide" className="w-12 h-12 rounded-full border border-[var(--line)] flex items-center justify-center text-[var(--ink)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors">
+                <ChevronLeft size={18} />
               </button>
-              <button aria-label="Next Slide" className="w-10 h-10 rounded-full border border-[var(--line)] flex items-center justify-center text-[var(--ink)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors">
-                <ChevronRight size={16} />
+              <button aria-label="Next Slide" className="w-12 h-12 rounded-full border border-[var(--line)] flex items-center justify-center text-[var(--ink)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors">
+                <ChevronRight size={18} />
               </button>
             </div>
           </div>

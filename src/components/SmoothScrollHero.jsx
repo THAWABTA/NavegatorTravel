@@ -64,16 +64,21 @@ const SmoothScrollHero = () => {
   }, []);
 
   useGSAP(() => {
-    // Hero word chars entrance — mask reveal + blur-to-sharp
-    const heroWords = scopeRef.current.querySelectorAll('.hero-word');
-    gsap.set(heroWords, { y: '110%', filter: 'blur(10px)' });
-    gsap.to(heroWords, {
-      y: '0%',
-      filter: 'blur(0px)',
-      duration: 1.2,
-      ease: "power3.out",
-      stagger: 0.07,
-      delay: 0.2,
+    let mm = gsap.matchMedia();
+
+    // Only animate hero words on desktop (since they are hidden on mobile)
+    mm.add("(min-width: 768px)", () => {
+      // Hero word chars entrance — mask reveal + blur-to-sharp
+      const heroWords = scopeRef.current.querySelectorAll('.hero-word');
+      gsap.set(heroWords, { y: '110%', filter: 'blur(10px)' });
+      gsap.to(heroWords, {
+        y: '0%',
+        filter: 'blur(0px)',
+        duration: 1.2,
+        ease: "power3.out",
+        stagger: 0.07,
+        delay: 0.2,
+      });
     });
 
     // Wordmark fade — blur-to-sharp, matching the hero copy
@@ -397,7 +402,7 @@ const SmoothScrollHero = () => {
             style={{ paddingLeft: 'clamp(1.25rem, 5vw, 5rem)', paddingRight: 'clamp(1.25rem, 5vw, 5rem)' }}
           >
             {/* LEFT */}
-            <div className="hero-text-left max-w-xs sm:max-w-sm md:max-w-md min-w-0">
+            <div className="hidden md:block hero-text-left max-w-xs sm:max-w-sm md:max-w-md min-w-0">
               <h1 className="display-font leading-none tracking-tight font-light" style={{ fontSize: 'clamp(1.8rem, 6vw, 3.875rem)', marginTop: 'clamp(-6rem, -8vh, 0px)' }}>
                 <span className="word-mask block"><span className="hero-word inline-block">The</span></span>
                 <span className="word-mask block"><span className="hero-word inline-block">World</span></span>
@@ -413,7 +418,7 @@ const SmoothScrollHero = () => {
             </div>
 
             {/* RIGHT */}
-            <div className="hero-text-right max-w-xs sm:max-w-sm md:max-w-md flex flex-col items-end min-w-0">
+            <div className="hidden md:flex hero-text-right max-w-xs sm:max-w-sm md:max-w-md flex-col items-end min-w-0">
               <h1 className="display-font font-light leading-none tracking-tight text-right" style={{ fontSize: 'clamp(1.6rem, 5.5vw, 3.5rem)', paddingTop: 'clamp(4rem, 15vh, 14rem)' }}>
                 <span className="word-mask block"><span className="hero-word inline-block">Beyond</span></span>
                 <span className="word-mask block"><span className="hero-word inline-block italic text-[var(--accent)]">Navigator</span></span>

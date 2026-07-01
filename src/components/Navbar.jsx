@@ -92,7 +92,7 @@ const Navbar = () => {
           letter-spacing: 0.18em;
           text-transform: uppercase;
           color: var(--nav-text);
-          padding: 10px 24px;
+          padding: 12px 24px;
           border-radius: 999px;
           transition: color 0.35s ease, background-color 0.35s ease;
           cursor: pointer;
@@ -132,10 +132,10 @@ const Navbar = () => {
         <div className="flex md:hidden flex-col items-start gap-2">
           <button 
             onClick={() => setIsOpen(!isOpen)}
-            className="glass-capsule !p-3 hover:bg-[var(--nav-hover-bg)] transition-colors"
+            className="glass-capsule flex items-center justify-center w-12 h-12 !p-0 hover:bg-[var(--nav-hover-bg)] transition-colors"
             aria-label="Toggle Menu"
           >
-            {isOpen ? <X size={20} color="var(--nav-text)" /> : <Menu size={20} color="var(--nav-text)" />}
+            {isOpen ? <X size={18} color="var(--nav-text)" /> : <Menu size={18} color="var(--nav-text)" />}
           </button>
           
           {isOpen && (
