@@ -1000,7 +1000,7 @@ const About = () => {
       gsap.fromTo(el,
         { width: '0px', opacity: 0 },
         {
-          width: '40px', opacity: 1,
+          width: '2.5rem', opacity: 1,
           duration: 0.8, ease: 'power2.out',
           scrollTrigger: {
             trigger: el, start: 'top 90%',
