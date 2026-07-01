@@ -1152,7 +1152,7 @@ const About = () => {
                     <span>{d.name}</span>
                   </h3>
                   <p data-text-body className="text-sm text-[var(--ink-soft)] leading-7 font-light max-w-sm">{d.desc}</p>
-                  <button className={`chapter-btn btn-ui-cta mt-2 border border-[var(--line)] text-[var(--ink)] text-[11px] tracking-[0.15em] uppercase font-medium hover:border-[var(--accent)] hover:text-[var(--accent)] ${reversed ? 'lg:self-end' : 'self-start'}`}>
+                  <button className={`chapter-btn btn-ui-cta mt-2 border border-[var(--line)] text-[var(--ink)] text-[11px] tracking-[0.15em] uppercase font-medium hover:border-[var(--accent)] hover:text-[var(--accent)] self-start ${reversed ? 'lg:self-end' : ''}`}>
                     Explore Destination <ArrowUpRight size={16} />
                   </button>
                 </div>
