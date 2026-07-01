@@ -111,19 +111,21 @@ const Navbar = () => {
 
       <nav className={`fixed top-[20px] left-[20px] md:top-[28px] md:left-[40px] z-[100] nav--${navTheme}`}>
         {/* Desktop Navbar */}
-        <div className="hidden md:flex glass-capsule">
-          {navLinks.map((l) => {
-            const isActive = pathname === l.href;
-            return (
-              <a
-                key={l.text}
-                href={l.href}
-                className={`glass-nav-item ${isActive ? "is-active" : ""}`}
-              >
-                {l.text}
-              </a>
-            );
-          })}
+        <div className="hidden md:flex">
+          <div className="glass-capsule">
+            {navLinks.map((l) => {
+              const isActive = pathname === l.href;
+              return (
+                <a
+                  key={l.text}
+                  href={l.href}
+                  className={`glass-nav-item ${isActive ? "is-active" : ""}`}
+                >
+                  {l.text}
+                </a>
+              );
+            })}
+          </div>
         </div>
 
         {/* Mobile Navbar */}
