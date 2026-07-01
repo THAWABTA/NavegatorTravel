@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const [navTheme, setNavTheme] = useState("dark");
+  const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -107,8 +109,9 @@ const Navbar = () => {
         }
       `}</style>
 
-      <nav className={`fixed top-[28px] left-[40px] z-[100] nav--${navTheme}`}>
-        <div className="flex glass-capsule">
+      <nav className={`fixed top-[20px] left-[20px] md:top-[28px] md:left-[40px] z-[100] nav--${navTheme}`}>
+        {/* Desktop Navbar */}
+        <div className="hidden md:flex glass-capsule">
           {navLinks.map((l) => {
             const isActive = pathname === l.href;
             return (
@@ -121,6 +124,35 @@ const Navbar = () => {
               </a>
             );
           })}
+        </div>
+
+        {/* Mobile Navbar */}
+        <div className="flex md:hidden flex-col items-start gap-2">
+          <button 
+            onClick={() => setIsOpen(!isOpen)}
+            className="glass-capsule !p-3 hover:bg-[var(--nav-hover-bg)] transition-colors"
+            aria-label="Toggle Menu"
+          >
+            {isOpen ? <X size={20} color="var(--nav-text)" /> : <Menu size={20} color="var(--nav-text)" />}
+          </button>
+          
+          {isOpen && (
+            <div className="glass-capsule flex-col items-start !p-2 gap-1 w-[200px]">
+              {navLinks.map((l) => {
+                const isActive = pathname === l.href;
+                return (
+                  <a
+                    key={l.text}
+                    href={l.href}
+                    onClick={() => setIsOpen(false)}
+                    className={`glass-nav-item w-full text-left !px-4 !py-3 ${isActive ? "is-active" : ""}`}
+                  >
+                    {l.text}
+                  </a>
+                );
+              })}
+            </div>
+          )}
         </div>
       </nav>
     </>
