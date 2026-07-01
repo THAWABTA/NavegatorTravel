@@ -46,6 +46,7 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <link rel="preload" as="video" href="/video/hero.mp4" type="video/mp4" />
       </head>
       <body className="antialiased">
         <LenisProvider>

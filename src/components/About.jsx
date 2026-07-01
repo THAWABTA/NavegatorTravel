@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import SplitType from 'split-type';
@@ -695,20 +696,27 @@ const About = () => {
           y: `-=${floatAmp}`,
           duration: floatDur, ease: E.ambient, yoyo: true, repeat: -1, delay: floatDel,
         });
+        let isTicking = false;
         const handleMove = (e) => {
-          const rect = postcard.getBoundingClientRect();
-          const cx   = (e.clientX - rect.left - rect.width  * 0.5) / (rect.width  * 0.5);
-          const cy   = (e.clientY - rect.top  - rect.height * 0.5) / (rect.height * 0.5);
-          if (img) gsap.to(img, { x: cx * -6, y: cy * -4, scale: 1.06, duration: M.hover.slow, ease: E.settle, overwrite: 'auto' });
-          gsap.to(postcard, {
-            rotateX: -cy * 3, rotateY: cx * 3,
-            duration: M.hover.mid, ease: E.settle, overwrite: 'auto',
-            transformPerspective: 900, transformOrigin: 'center center',
-          });
-          gsap.to(postcard, {
-            boxShadow: `${cx * 6}px ${12 + Math.abs(cy) * 8}px ${32 + Math.abs(cy) * 24}px rgba(0,0,0,${0.14 + Math.abs(cy) * 0.1})`,
-            duration: M.hover.mid, ease: E.settle, overwrite: false,
-          });
+          if (!isTicking) {
+            window.requestAnimationFrame(() => {
+              const rect = postcard.getBoundingClientRect();
+              const cx   = (e.clientX - rect.left - rect.width  * 0.5) / (rect.width  * 0.5);
+              const cy   = (e.clientY - rect.top  - rect.height * 0.5) / (rect.height * 0.5);
+              if (img) gsap.to(img, { x: cx * -6, y: cy * -4, scale: 1.06, duration: M.hover.slow, ease: E.settle, overwrite: 'auto' });
+              gsap.to(postcard, {
+                rotateX: -cy * 3, rotateY: cx * 3,
+                duration: M.hover.mid, ease: E.settle, overwrite: 'auto',
+                transformPerspective: 900, transformOrigin: 'center center',
+              });
+              gsap.to(postcard, {
+                boxShadow: `${cx * 6}px ${12 + Math.abs(cy) * 8}px ${32 + Math.abs(cy) * 24}px rgba(0,0,0,${0.14 + Math.abs(cy) * 0.1})`,
+                duration: M.hover.mid, ease: E.settle, overwrite: false,
+              });
+              isTicking = false;
+            });
+            isTicking = true;
+          }
         };
         const handleLeave = () => {
           if (img) gsap.to(img, { x: 0, y: 0, scale: 1, duration: M.reveal.fast, ease: E.settle, overwrite: 'auto' });
@@ -908,12 +916,19 @@ const About = () => {
       const submitBtn = root.querySelector('.contact-submit-btn');
       if (submitBtn) {
         const icon = submitBtn.querySelector('svg');
+        let isTickingBtn = false;
         const handleMove = (e) => {
-          const rect = submitBtn.getBoundingClientRect();
-          const cx   = (e.clientX - rect.left - rect.width  * 0.5) * 0.14;
-          const cy   = (e.clientY - rect.top  - rect.height * 0.5) * 0.14;
-          gsap.to(submitBtn, { x: cx, y: cy, duration: M.hover.mid, ease: E.entry, overwrite: 'auto' });
-          if (icon) gsap.to(icon, { x: 4, duration: M.hover.mid, ease: E.entry, overwrite: 'auto' });
+          if (!isTickingBtn) {
+            window.requestAnimationFrame(() => {
+              const rect = submitBtn.getBoundingClientRect();
+              const cx   = (e.clientX - rect.left - rect.width  * 0.5) * 0.14;
+              const cy   = (e.clientY - rect.top  - rect.height * 0.5) * 0.14;
+              gsap.to(submitBtn, { x: cx, y: cy, duration: M.hover.mid, ease: E.entry, overwrite: 'auto' });
+              if (icon) gsap.to(icon, { x: 4, duration: M.hover.mid, ease: E.entry, overwrite: 'auto' });
+              isTickingBtn = false;
+            });
+            isTickingBtn = true;
+          }
         };
         const handleLeave = () => {
           gsap.to(submitBtn, { x: 0, y: 0, duration: M.reveal.fast, ease: E.settle, overwrite: 'auto' });
@@ -961,10 +976,12 @@ const About = () => {
         link.style.backgroundPosition = 'left bottom 0px';
         link.style.backgroundSize     = '0% 1px';
         const handleEnter = (e) => {
-          const rect     = link.getBoundingClientRect();
-          const fromLeft = e.clientX < rect.left + rect.width * 0.5;
-          gsap.set(link, { backgroundPositionX: fromLeft ? '0%' : '100%' });
-          gsap.to(link, { backgroundSize: '100% 1px', duration: M.hover.mid, ease: E.settle, overwrite: 'auto' });
+          window.requestAnimationFrame(() => {
+            const rect     = link.getBoundingClientRect();
+            const fromLeft = e.clientX < rect.left + rect.width * 0.5;
+            gsap.set(link, { backgroundPositionX: fromLeft ? '0%' : '100%' });
+            gsap.to(link, { backgroundSize: '100% 1px', duration: M.hover.mid, ease: E.settle, overwrite: 'auto' });
+          });
         };
         const handleLeave = () => gsap.to(link, { backgroundSize: '0% 1px', duration: M.hover.fast, ease: E.exit, overwrite: 'auto' });
         link.addEventListener('mouseenter', handleEnter);
@@ -1144,7 +1161,7 @@ const About = () => {
                   className={`chapter-postcard relative w-[210px] sm:w-[250px] lg:w-[280px] aspect-[4/5] overflow-hidden rounded-sm shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] ${reversed ? 'lg:order-1' : 'lg:order-2'}`}
                   style={{ boxShadow: '0 2px 4px rgba(0,0,0,0.04), 0 8px 18px rgba(0,0,0,0.08), 0 28px 48px -12px rgba(0,0,0,0.18)' }}
                 >
-                  <img src={d.img} alt={d.name} className="chapter-img w-full h-full object-cover" />
+                  <Image src={d.img} alt={d.name} fill sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" className="chapter-img object-cover" />
                   <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.22) 100%)' }} />
                 </div>
               </div>
@@ -1161,7 +1178,7 @@ const About = () => {
           <h2 data-text-heading className="display-font text-[clamp(2rem,4.5vw,3.5rem)] font-light text-[var(--ink)] leading-none">On the Map</h2>
         </div>
         <div className="relative w-full aspect-[16/9] sm:aspect-[2/1] rounded-sm overflow-hidden" style={{ background: 'var(--bg-soft)', border: '1px solid var(--line)' }}>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Equirectangular_projection_SW.jpg" alt="World map" className="w-full h-full object-cover opacity-30" />
+          <Image src="https://upload.wikimedia.org/wikipedia/commons/8/83/Equirectangular_projection_SW.jpg" alt="World map" fill loading="lazy" className="object-cover opacity-30" unoptimized />
           {mapPins.map((p, i) => (
             <div key={`${p.label}-${i}`} className="map-pin absolute flex flex-col items-center" style={{ top: p.top, left: p.left, transform: 'translate(-50%, -50%)' }}>
               <span className="block w-2 h-2 rounded-full" style={{ background: 'var(--accent)' }} />
@@ -1183,7 +1200,7 @@ const About = () => {
             </p>
             <div className="mt-10 flex items-center gap-4">
               <div className="w-12 h-12 rounded-full overflow-hidden">
-                <img src={testimonials[0].img} alt={testimonials[0].name} className="w-full h-full object-cover" />
+                <Image src={testimonials[0].img} alt={testimonials[0].name} width={100} height={100} loading="lazy" className="w-full h-full object-cover" />
               </div>
               <div>
                 <p data-text-eyebrow className="eyebrow text-[var(--ink)]">{testimonials[0].name}</p>
@@ -1195,7 +1212,7 @@ const About = () => {
             <div className="grid grid-cols-2 gap-3">
               {featuredDestinations.slice(0, 4).map((d) => (
                 <div key={d.name} className="aspect-square overflow-hidden rounded-sm">
-                  <img src={d.img} alt={d.name} className="w-full h-full object-cover" />
+                  <Image src={d.img} alt={d.name} fill loading="lazy" sizes="20vw" className="object-cover" />
                 </div>
               ))}
             </div>

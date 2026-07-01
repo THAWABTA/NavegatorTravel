@@ -15,7 +15,9 @@ import cloudsImage from "@/assets/images/cloudsImage.webp";
 import aboveImage from "@/assets/images/aboveImage.webp";
 
 import Navbar from './Navbar';
-import About from './About';
+import dynamic from 'next/dynamic';
+
+const About = dynamic(() => import('./About'));
 import Loader from './Loader';
 
 const setTheme = (light) => {
@@ -282,9 +284,12 @@ const SmoothScrollHero = () => {
       {/* Fixed logo that animates up on scroll */}
       <div className="fixed inset-0 flex items-center justify-center z- pointer-events-none">
         <div ref={wordmarkRef}>
-         <img
+         <Image
   src="/pic/IMG_4817 copy (12) (1).png"
   alt="Company Logo"
+  width={400}
+  height={80}
+  priority={true}
   className="w-auto object-contain"
   style={{ height: 'clamp(2.5rem, 5vw, 5rem)', maxWidth: '50vw' }}
 />
