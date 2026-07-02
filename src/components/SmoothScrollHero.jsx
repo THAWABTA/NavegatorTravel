@@ -430,8 +430,8 @@ const SmoothScrollHero = () => {
             {/* RIGHT */}
             <div className="hidden md:flex hero-text-right max-w-xs sm:max-w-sm md:max-w-md flex-col items-end min-w-0">
               <h1 className="display-font font-light leading-none tracking-tight text-right" style={{ fontSize: 'clamp(1.6rem, 5.5vw, 3.5rem)', paddingTop: 'clamp(4rem, 15vh, 14rem)' }}>
-                <span className="word-mask block"><span className="hero-word inline-block">Beyond</span></span>
-                <span className="word-mask block"><span className="hero-word inline-block italic text-[var(--accent)]">Navigator</span></span>
+                <span className="word-mask block" style={{ padding: '0.15em 0.1em', margin: '-0.15em -0.1em' }}><span className="hero-word inline-block">Beyond</span></span>
+                <span className="word-mask block" style={{ padding: '0.15em 0.1em', margin: '-0.15em -0.1em' }}><span className="hero-word inline-block italic text-[var(--accent)]">Navigator</span></span>
               </h1>
             </div>
           </div>
