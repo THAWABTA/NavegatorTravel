@@ -294,8 +294,9 @@ export default function ConciergeSection() {
 
           <h2 className="cc-hero-heading" aria-label="Your journey begins with us.">
             <span className="cc-line"><span className="cc-line-inner">Your journey</span></span>
-            <span className="cc-line"><span className="cc-line-inner">begins with</span></span>
-            <span className="cc-line cc-line--italic"><span className="cc-line-inner">us.</span></span>
+            <span className="cc-line">
+              <span className="cc-line-inner">begins with <span className="cc-line--italic">us.</span></span>
+            </span>
           </h2>
 
           <p className="cc-hero-desc">
@@ -314,7 +315,7 @@ export default function ConciergeSection() {
               className="cc-btn cc-btn--ghost w-full sm:w-auto justify-center"
             >
               <span className="cc-btn-icon-left"><IconWhatsApp /></span>
-              <span className="cc-btn-text">Talk to Concierge</span>
+              <span className="cc-btn-text">Talk to a Consultant</span>
             </a>
           </div>
 

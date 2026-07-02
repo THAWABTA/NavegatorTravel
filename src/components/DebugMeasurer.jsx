@@ -27,7 +27,7 @@ export default function DebugMeasurer() {
       const exploreBtn = Array.from(document.querySelectorAll('button')).find(b => b.textContent.includes('Explore Destination'));
       const conciergeBtns = Array.from(document.querySelectorAll('.cc-btn'));
       const beginJourney = conciergeBtns.find(b => b.textContent.includes('Begin Your Journey'));
-      const talkConcierge = conciergeBtns.find(b => b.textContent.includes('Talk to Concierge'));
+      const talkConcierge = conciergeBtns.find(b => b.textContent.includes('Talk to a Consultant'));
       const conciergeSubmit = document.querySelector('.cc-submit');
 
       const data = {
