@@ -86,7 +86,7 @@ const CONTACTS = [
     Icon: IconPhone,
     label: 'Phone',
     value: '+962 792227711',
-    desc: 'Private Concierge',
+    desc: <span style={{ whiteSpace: 'nowrap', fontSize: 'clamp(8px, 2.5vw, 11px)' }}>Available Sun–Thu 10:00 AM – 6:00 PM</span>,
     href: 'tel:+962792227711',
   },
   {
