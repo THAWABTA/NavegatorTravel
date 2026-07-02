@@ -4179,10 +4179,8 @@ video:not([class*="w-["]) {
 /* ── H. Hero copy — word-mask prevents text overflow on small screens ── */
 .word-mask {
   display: block;
-  overflow: hidden;
-  /* Expand the clipping boundary horizontally to prevent clipping italic overhangs/slants */
-  padding: 0 0.25em;
-  margin: 0 -0.25em;
+  overflow: clip;
+  overflow-clip-margin: 0.25em; /* Allows descenders and italic slants to render outside the box */
   /* On very narrow phones the word can be wider than available area */
   max-width: 100%;
 }

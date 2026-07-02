@@ -75,7 +75,7 @@ const SmoothScrollHero = () => {
     mm.add("(min-width: 768px)", () => {
       // Hero word chars entrance — mask reveal + blur-to-sharp
       const heroWords = scopeRef.current.querySelectorAll('.hero-word');
-      gsap.set(heroWords, { y: '110%', filter: 'blur(10px)' });
+      gsap.set(heroWords, { y: '130%', filter: 'blur(10px)' });
       gsap.to(heroWords, {
         y: '0%',
         filter: 'blur(0px)',
