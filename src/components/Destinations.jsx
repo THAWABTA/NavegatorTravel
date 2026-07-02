@@ -620,7 +620,7 @@ function DestCard({ dest, cardRef, isPriority }) {
 
               <h3
                 style={{
-                  fontFamily: `var(--font-playfair, "Playfair Display", serif)`,
+                  fontFamily: `var(--font-open-sans, sans-serif)`,
                   fontWeight: 400,
                   fontSize: "clamp(2.4rem, 3.5vw, 3.2rem)",
                   color: "#ffffff",
@@ -692,7 +692,7 @@ function DestCard({ dest, cardRef, isPriority }) {
               <h3
                 className="dc-back-title"
                 style={{
-                  fontFamily: `var(--font-playfair, "Playfair Display", serif)`,
+                  fontFamily: `var(--font-open-sans, sans-serif)`,
                   fontWeight: 400,
                   fontSize: "clamp(1.4rem, 2vw, 1.8rem)",
                   color: "#2a2725",
@@ -749,7 +749,7 @@ function DestCard({ dest, cardRef, isPriority }) {
                       fontSize: "clamp(0.85rem, 1vw, 0.95rem)",
                       lineHeight: 1.4,
                       fontWeight: 400,
-                      fontFamily: `var(--font-playfair, "Playfair Display", serif)`,
+                      fontFamily: `var(--font-open-sans, sans-serif)`,
                     }}>
                       {h.value}
                     </span>
@@ -1138,8 +1138,8 @@ function Footer({ destCount }) {
           gap: "1.5rem",
         }}
       >
-        <p className="eyebrow" style={{ color: "rgba(255,255,255,0.45)", fontSize: "9px", letterSpacing: "0.2em" }}>
-          Navigator TRAVEL · EST. 2024
+        <p className="eyebrow whitespace-nowrap" style={{ color: "rgba(255,255,255,0.45)", fontSize: "clamp(7px, 2.5vw, 9px)", letterSpacing: "0.2em" }}>
+          AL MALLAH FOR TRAVEL & TOURISM L.L.C 2021
         </p>
         <p className="eyebrow" style={{ color: "var(--gold, #d9a857)", fontSize: "9px", letterSpacing: "0.2em" }}>
           {destCount} DESTINATIONS · ONE ROUTE
@@ -1158,7 +1158,9 @@ function Footer({ destCount }) {
 
 // ─────────────────────────────────────────────────────────────────────────────
 // MAIN COMPONENT
-// ─────────────────────────────────────────────────────────────────────────────
+// ─── MAIN COMPONENT ────────────────────────────────────────────────────────────
+const SHOW_GLOBE = false; // TODO: uncomment to restore globe (set to true)
+
 const Destinations = () => {
   const rootRef = useRef(null);
   const takeoffRef = useRef(null);
@@ -1291,19 +1293,8 @@ const Destinations = () => {
           trigger: section, start: "top top", end: "+=380%",
           scrub: 0.8, pin: true, anticipatePin: 1,
           onUpdate(self) {
-            const state = globeState.current;
-            if (!state) return;
             const p = self.progress;
-
-            state.globe.rotation.y = p * Math.PI * 1.15 + 0.4;
-            state.clouds.rotation.y = (p * Math.PI * 1.15 + 0.4) * 0.82;
-            state.globe.rotation._scrollControlled = true;
-
             const drawP = Math.min(1, p / 0.75);
-            const count = Math.floor(drawP * state.totalRoutePoints);
-            state.routeLine.geometry.setDrawRange(0, Math.max(2, count));
-
-            state.tick(p);
 
             if (earthCoord) {
               const lat = 41.0 - p * 50;
@@ -1313,6 +1304,18 @@ const Destinations = () => {
             if (destCounter) {
               destCounter.textContent = String(Math.round(drawP * DESTINATIONS.length)).padStart(2, "0");
             }
+
+            const state = globeState.current;
+            if (!state) return;
+
+            state.globe.rotation.y = p * Math.PI * 1.15 + 0.4;
+            state.clouds.rotation.y = (p * Math.PI * 1.15 + 0.4) * 0.82;
+            state.globe.rotation._scrollControlled = true;
+
+            const count = Math.floor(drawP * state.totalRoutePoints);
+            state.routeLine.geometry.setDrawRange(0, Math.max(2, count));
+
+            state.tick(p);
           },
         },
       });
@@ -1413,19 +1416,20 @@ const Destinations = () => {
       </section>
 
       {/* ══ INTERACTIVE GLOBE ═════════════════════════════════════════════ */}
-      <section
-        ref={earthRef}
-        className="relative w-full h-screen overflow-hidden"
-        style={{ background: "#020609" }}
-        aria-label="Aerial view — world route"
-      >
-        <div className="absolute inset-0 z-10" style={{ pointerEvents: "none" }}>
-          <canvas
-            ref={globeCanvas}
-            className="w-full h-full"
-            style={{ display: "block", willChange: "transform" }}
-          />
-        </div>
+      {SHOW_GLOBE && (
+        <section
+          ref={earthRef}
+          className="relative w-full h-screen overflow-hidden"
+          style={{ background: "#020609" }}
+          aria-label="Aerial view — world route"
+        >
+          <div className="absolute inset-0 z-10" style={{ pointerEvents: "none" }}>
+            <canvas
+              ref={globeCanvas}
+              className="w-full h-full"
+              style={{ display: "block", willChange: "transform" }}
+            />
+          </div>
 
         {/* HUD — top left */}
         <div className="absolute z-20 pointer-events-none" style={{ top: "clamp(5rem,10vh,7rem)", left: "clamp(1.5rem,6vw,6rem)" }}>
@@ -1452,8 +1456,9 @@ const Destinations = () => {
             <span className="dest-counter-num">00</span>
             <span style={{ fontSize: "0.45em", opacity: 0.5, marginLeft: "0.25em" }}>/ {String(DESTINATIONS.length).padStart(2, "0")}</span>
           </p>
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
 
       {/* ══ DESTINATIONS GRID ═════════════════════════════════════════════ */}
       <DestinationsGrid gridRef={gridRef} />

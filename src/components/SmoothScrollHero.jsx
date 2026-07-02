@@ -124,13 +124,18 @@ const SmoothScrollHero = () => {
     tl.to(".scroll-indicator", { opacity: 0, duration: 1 }, 0);
 
     // 4. Wordmark travels up — lands at navbar row center
-    //    py-6 (24px) on mobile, py-7 (28px) on lg; logo half-height from live DOM
-    const navPadding = window.innerWidth >= 1024 ? 28 : 24;
-    const logoHalfH = wordmarkRef.current
-      ? wordmarkRef.current.getBoundingClientRect().height / 2
-      : 20;
-    const navbarCenter = navPadding + logoHalfH;
-    const logoY = -(window.innerHeight / 2 - navbarCenter);
+    // We dynamically find the navbar capsule to get its exact visual center.
+    const navbarEl = document.querySelector('.glass-capsule');
+    let navCenterY;
+    if (navbarEl) {
+      const rect = navbarEl.getBoundingClientRect();
+      navCenterY = rect.top + rect.height / 2;
+    } else {
+      // Fallback if navbar not found
+      const navTop = window.innerWidth >= 768 ? 28 : 20;
+      navCenterY = navTop + 24; // approx half height of 48px capsule
+    }
+    const logoY = -(window.innerHeight / 2 - navCenterY);
     const logoScale = window.innerWidth < 480
       ? 0.70
       : window.innerWidth < 1024

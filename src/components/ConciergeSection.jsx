@@ -9,6 +9,7 @@ import {
   IconBrandWhatsapp,
   IconPhone,
   IconMail,
+  IconLock,
 } from '@tabler/icons-react';
 import './ConciergeSection.css';
 import { DESTINATIONS as RAW_DESTINATIONS } from '../data/destinations';
@@ -35,29 +36,27 @@ const IconWhatsApp = () => (
 const TRUST_ITEMS = [
   {
     icon: <IconPhone size={22} stroke={1.4} />,
-    label: 'Private Designers',
+    label: 'Travel Consultants',
     sub: 'World-class travel experts\ndedicated to you.',
   },
   {
     icon: <IconMail size={22} stroke={1.4} />,
-    label: 'Response Within 20 Min',
+    label: 'Response Within 30 Min',
     sub: 'We value your time as\nmuch as you do.',
   },
   {
     icon: <IconBrandWhatsapp size={22} stroke={1.4} />,
-    label: '24/7 Concierge',
+    label: '24/7 Support',
     sub: 'Whenever you need us,\nwherever you are.',
   },
   {
-    icon: <IconBrandInstagram size={22} stroke={1.4} />,
+    icon: <IconLock size={22} stroke={1.4} />,
     label: 'Completely Confidential',
     sub: 'Your privacy is our\nhighest priority.',
   },
 ];
 
-const PRESS = [
-  'Robb Report', 'Condé Nast Traveler', 'Forbes', 'Tatler', 'Vogue', 'Luxury Travel Advisor',
-];
+
 
 const DESTINATIONS = [
   '',
@@ -122,17 +121,14 @@ export default function ConciergeSection() {
   const heroRef      = useRef(null);
   const drawerRef    = useRef(null);
   const overlayRef   = useRef(null);
-  const btn1Ref      = useRef(null);
+
   const btn2Ref      = useRef(null);
   const contactsRef  = useRef(null);
   const [open, setOpen]   = useState(false);
   const [sent, setSent]   = useState(false);
 
   /* ── Open / close drawer ───────────────────────────────────── */
-  const openDrawer = () => {
-    setOpen(true);
-    document.body.style.overflow = 'hidden';
-  };
+
   const closeDrawer = () => {
     const drawer  = drawerRef.current;
     const overlay = overlayRef.current;
@@ -217,19 +213,9 @@ export default function ConciergeSection() {
       );
     }
 
-    /* Press logos */
-    const pressItems = root.querySelectorAll('.cc-press-item');
-    if (pressItems.length) {
-      gsap.fromTo(pressItems,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.8, ease: 'power2.out', stagger: 0.07,
-          scrollTrigger: { trigger: pressItems[0].closest('.cc-press-bar'), start: 'top 92%' }
-        }
-      );
-    }
 
     /* Button 1 — magnetic */
-    [btn1Ref, btn2Ref].forEach(bRef => {
+    [btn2Ref].forEach(bRef => {
       const btn = bRef.current;
       if (!btn) return;
       const onMove = (e) => {
@@ -318,16 +304,7 @@ export default function ConciergeSection() {
           </p>
 
           <div className="cc-hero-btns">
-            <button
-              ref={btn1Ref}
-              type="button"
-              className="cc-btn cc-btn--primary w-full sm:w-auto justify-center"
-              onClick={openDrawer}
-            >
-              <span className="cc-btn-text">Begin Your Journey</span>
-              <span className="cc-btn-icon"><IconArrow /></span>
-              <span className="cc-btn-fill" aria-hidden="true" />
-            </button>
+
 
             <a
               ref={btn2Ref}
@@ -341,7 +318,7 @@ export default function ConciergeSection() {
             </a>
           </div>
 
-          <p className="cc-hero-note">Usually replies within 20 minutes</p>
+          <p className="cc-hero-note">Usually replies within 30 minutes during working hours</p>
         </div>
 
         {/* Scroll indicator */}
@@ -371,18 +348,6 @@ export default function ConciergeSection() {
         ))}
       </div>
 
-      {/* ═══ PRESS BAR ══════════════════════════════════════════ */}
-      <div className="cc-press-bar">
-        <p className="cc-press-eyebrow">Trusted by Travelers Worldwide</p>
-        <div className="cc-press-logos">
-          {PRESS.map((name, i) => (
-            <React.Fragment key={name}>
-              <span className="cc-press-item">{name}</span>
-              {i < PRESS.length - 1 && <span className="cc-press-sep" aria-hidden="true">|</span>}
-            </React.Fragment>
-          ))}
-        </div>
-      </div>
 
       {/* ═══ CONTACT SECTION ════════════════════════════════════ */}
       <div ref={contactsRef} className="cc-contacts-root">
@@ -598,7 +563,7 @@ export default function ConciergeSection() {
                 <div className="cc-sent">
                   <span className="cc-sent-mark">✦</span>
                   <p className="cc-sent-body">
-                    A dedicated member of our concierge team will reach out within 20 minutes.
+                    A dedicated member of our concierge team will reach out within 30 minutes.
                     Thank you for trusting Navigator with your next extraordinary chapter.
                   </p>
                   <button type="button" className="cc-sent-close" onClick={closeDrawer}>

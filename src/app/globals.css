@@ -1,4 +1,4 @@
-﻿/* [project]/src/app/globals.css [app-client] (css) */
+/* [project]/src/app/globals.css [app-client] (css) */
 @layer properties {
   @supports (((-webkit-hyphens: none)) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color: rgb(from red r g b)))) {
     *, :before, :after, ::backdrop {
@@ -71,7 +71,7 @@
 
 @layer theme {
   :root, :host {
-    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-sans: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --color-black: #000;
     --color-white: #fff;
@@ -235,7 +235,7 @@
   /* From globals.css @layer base */
 img, video {
   max-width: 100%;
-  height: auto;   /* â† THIS */
+  height: auto;   /* ← THIS */
 }
 
   button, input, select, optgroup, textarea {
@@ -2656,16 +2656,16 @@ body {
   background: var(--bg);
   color: var(--ink);
   margin: 0;
-  font-family: var(--font-sans), sans-serif;
+  font-family: var(--font-open-sans), sans-serif;
   overflow-x: hidden;
 }
 
 .display-font {
-  font-family: var(--font-cormorant), serif;
+  font-family: var(--font-open-sans), sans-serif;
 }
 
 .body-font {
-  font-family: var(--font-sans), sans-serif;
+  font-family: var(--font-open-sans), sans-serif;
 }
 
 .eyebrow {
@@ -2780,7 +2780,7 @@ body.theme-light .wordmark {
 }
 .stat-num {
   color: var(--ink);
-  font-family: var(--font-cormorant), serif;
+  font-family: var(--font-open-sans), sans-serif;
   font-size: clamp(3rem, 7vw, 6rem);
   font-weight: 300;
   line-height: 1;
@@ -3410,16 +3410,16 @@ body {
   background: var(--bg);
   color: var(--ink);
   margin: 0;
-  font-family: var(--font-sans), sans-serif;
+  font-family: var(--font-open-sans), sans-serif;
   overflow-x: hidden;
 }
 
 .display-font {
-  font-family: var(--font-cormorant), serif;
+  font-family: var(--font-open-sans), sans-serif;
 }
 
 .body-font {
-  font-family: var(--font-sans), sans-serif;
+  font-family: var(--font-open-sans), sans-serif;
 }
 
 .eyebrow {
@@ -3507,7 +3507,7 @@ body.theme-light .wordmark {
 }
 .stat-num {
   color: var(--ink);
-  font-family: var(--font-cormorant), serif;
+  font-family: var(--font-open-sans), sans-serif;
   font-size: clamp(3rem, 7vw, 6rem);
   font-weight: 300;
   line-height: 1;
@@ -4103,29 +4103,29 @@ section {
 }
 /*# sourceMappingURL=src_app_globals_91e4631d.css.map*/
 /* =======================================================================
-   Navigator TRAVEL â€” RESPONSIVE FIXES
+   Navigator TRAVEL — RESPONSIVE FIXES
    Added after audit. Only minimum CSS required.
    File: globals.css (append-only)
    Zero JSX / JS / GSAP / ScrollTrigger changes.
    ======================================================================= */
 
-/* â”€â”€ A. html overflow guard â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ── A. html overflow guard ─────────────────────────────────────────────
    body already has overflow-x:hidden, but iOS Safari still allows
    horizontal scroll if the <html> element itself is wider than the viewport.
    Adding it to html closes that gap cross-browser.
    Does NOT affect Lenis (which listens on window, not html/body scroll).
    ----------------------------------------------------------------------- */
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   RESPONSIVE SYSTEM â€” Full cross-viewport fix
-   Target: 320px â†’ 2560px, all devices listed in requirements
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════════════════════════════════════════════════════════
+   RESPONSIVE SYSTEM — Full cross-viewport fix
+   Target: 320px → 2560px, all devices listed in requirements
+   ═══════════════════════════════════════════════════════════════════════ */
 
-/* â”€â”€ A. No horizontal overflow on any viewport â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── A. No horizontal overflow on any viewport ──────────────────────── */
 html {
   overflow-x: hidden;
 }
 
-/* â”€â”€ B. Global media safety net â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ── B. Global media safety net ────────────────────────────────────────
    Prevents img/video from expanding beyond containers.
    ----------------------------------------------------------------------- */
 img:not([class*="w-["]),
@@ -4133,7 +4133,7 @@ video:not([class*="w-["]) {
   max-width: 100%;
 }
 
-/* â”€â”€ C. Wordmark â€” never overflows viewport on phones â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ── C. Wordmark — never overflows viewport on phones ─────────────────
    The logo img uses w-auto; on wide natural-ratio logos this clips on
    narrow viewports. Cap at 50vw.
    ----------------------------------------------------------------------- */
@@ -4141,7 +4141,7 @@ video:not([class*="w-["]) {
   max-width: 50vw;
 }
 
-/* â”€â”€ D. chapter-copy flex shrink fix â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ── D. chapter-copy flex shrink fix ──────────────────────────────────
    flex-1 without min-width:0 causes overflow on destination chapters.
    ----------------------------------------------------------------------- */
 .chapter-copy {
@@ -4149,7 +4149,7 @@ video:not([class*="w-["]) {
   overflow-wrap: break-word;
 }
 
-/* â”€â”€ E. Contact submit button â€” 320â€“375px overflow fix â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── E. Contact submit button — 320–375px overflow fix ─────────────── */
 @media (max-width: 390px) {
   .contact-submit-btn {
     width: 100%;
@@ -4157,18 +4157,18 @@ video:not([class*="w-["]) {
   }
 }
 
-/* â”€â”€ F. Contact inputs â€” prevent iOS auto-zoom on focus â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── F. Contact inputs — prevent iOS auto-zoom on focus ────────────── */
 .contact-input {
   font-size: max(1rem, 0.875rem);
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   G. HERO SECTION â€” Window frame & background images
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ════════════════════════════════════════════════════════════════════════
+   G. HERO SECTION — Window frame & background images
+   ════════════════════════════════════════════════════════════════════════ */
 
 /* Window scene images: on screens narrower than desktop the frame must
    still fill without stretching. object-cover + no fixed scale below lg.
-   The lg:scale-[1.3] in JSX is intentional desktop composition â€” kept. */
+   The lg:scale-[1.3] in JSX is intentional desktop composition — kept. */
 .window-scene video,
 .window-scene img {
   /* Ensure cover always fills without white bars on any ratio */
@@ -4176,7 +4176,7 @@ video:not([class*="w-["]) {
   min-height: 100%;
 }
 
-/* â”€â”€ H. Hero copy â€” word-mask prevents text overflow on small screens â”€â”€ */
+/* ── H. Hero copy — word-mask prevents text overflow on small screens ── */
 .word-mask {
   display: block;
   overflow: hidden;
@@ -4184,23 +4184,23 @@ video:not([class*="w-["]) {
   max-width: 100%;
 }
 
-/* â”€â”€ I. Hero text left/right blocks â€” prevent overflow on iPad portrait  */
+/* ── I. Hero text left/right blocks — prevent overflow on iPad portrait  */
 .hero-text-left,
 .hero-text-right {
   min-width: 0;
   flex-shrink: 1;
 }
 
-/* â”€â”€ J. Scroll indicator â€” hide on very small phones to avoid overlap â”€â”€ */
+/* ── J. Scroll indicator — hide on very small phones to avoid overlap ── */
 @media (max-width: 374px) {
   .scroll-indicator {
     display: none;
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   K. MAP PINS â€” hide text on small viewports, only dot visible
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════════════════════════════════════════════════════════
+   K. MAP PINS — hide text on small viewports, only dot visible
+   ═══════════════════════════════════════════════════════════════════════ */
 @media (max-width: 639px) {
   .map-pin .eyebrow {
     display: none;
@@ -4211,10 +4211,10 @@ video:not([class*="w-["]) {
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   L. PHILOSOPHY GRID â€” 1-col on mobile, 2-col on sm, 4-col on lg
+/* ═══════════════════════════════════════════════════════════════════════
+   L. PHILOSOPHY GRID — 1-col on mobile, 2-col on sm, 4-col on lg
       Borders need to adapt: no right border on last col, no top on first row
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   ═══════════════════════════════════════════════════════════════════════ */
 @media (max-width: 767px) {
   .philosophy-item {
     border-right: none !important;
@@ -4227,11 +4227,11 @@ video:not([class*="w-["]) {
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   M. CHAPTER POSTCARD â€” responsive sizing, no overflow on small screens
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════════════════════════════════════════════════════════
+   M. CHAPTER POSTCARD — responsive sizing, no overflow on small screens
+   ═══════════════════════════════════════════════════════════════════════ */
 .chapter-postcard {
-  /* w-[210px] at 320px would consume 65% of viewport â€” cap at 45vw */
+  /* w-[210px] at 320px would consume 65% of viewport — cap at 45vw */
   max-width: min(45vw, 280px);
 }
 @media (max-width: 639px) {
@@ -4242,9 +4242,9 @@ video:not([class*="w-["]) {
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   N. SECTION PADDING â€” proportional at 2560px and capped on small screens
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════════════════════════════════════════════════════════
+   N. SECTION PADDING — proportional at 2560px and capped on small screens
+   ═══════════════════════════════════════════════════════════════════════ */
 @media (min-width: 1536px) {
   /* Large monitors: increase section padding proportionally */
   .px-6.sm\:px-16.lg\:px-24,
@@ -4254,9 +4254,9 @@ video:not([class*="w-["]) {
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   O. MANIFESTO MEDIA â€” aspect ratio fix on ultra-wide
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════════════════════════════════════════════════════════
+   O. MANIFESTO MEDIA — aspect ratio fix on ultra-wide
+   ═══════════════════════════════════════════════════════════════════════ */
 .manifesto-media-wrap {
   /* Prevent overflow on 2560px */
   max-height: 85vh;
@@ -4267,61 +4267,61 @@ video:not([class*="w-["]) {
   object-position: center 30%;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   P. TESTIMONIAL IMAGES GRID â€” prevent overflow on very small phones
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════════════════════════════════════════════════════════
+   P. TESTIMONIAL IMAGES GRID — prevent overflow on very small phones
+   ═══════════════════════════════════════════════════════════════════════ */
 @media (max-width: 374px) {
   .testimonial-block .grid-cols-2 {
     grid-template-columns: 1fr;
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   Q. JOURNEY CHAPTER GAP â€” tighten at tablet sizes to avoid overflow
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════════════════════════════════════════════════════════
+   Q. JOURNEY CHAPTER GAP — tighten at tablet sizes to avoid overflow
+   ═══════════════════════════════════════════════════════════════════════ */
 @media (min-width: 1024px) and (max-width: 1279px) {
   .journey-chapter {
     gap: 2.5rem;
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   R. CLOUD MID/NEAR layers â€” width fix for very wide monitors
+/* ═══════════════════════════════════════════════════════════════════════
+   R. CLOUD MID/NEAR layers — width fix for very wide monitors
       On 2560px+ the 1500% width animates correctly but repaints too far.
       Using translate-based loops instead via GSAP; CSS width just needs
       to be >= 200% for seamless loop. Keep existing Tailwind widths and
       only fix the mobile size to prevent sub-pixel gap issues.
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   ═══════════════════════════════════════════════════════════════════════ */
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   S. ABOUT SECTION HEADINGS â€” line wrap fix on 1024-1280px
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════════════════════════════════════════════════════════
+   S. ABOUT SECTION HEADINGS — line wrap fix on 1024-1280px
+   ═══════════════════════════════════════════════════════════════════════ */
 @media (min-width: 1024px) and (max-width: 1280px) {
   .manifesto-intro p[data-split="heading"] {
     font-size: clamp(2.2rem, 5.5vw, 4.5rem);
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   T. FOOTER â€” flex-wrap on 1024-1280px prevents overflow
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════════════════════════════════════════════════════════
+   T. FOOTER — flex-wrap on 1024-1280px prevents overflow
+   ═══════════════════════════════════════════════════════════════════════ */
 @media (min-width: 1024px) and (max-width: 1279px) {
   footer .grid-cols-5 {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   U. EXPERIENCES SECTION â€” card grid clamp for 2560px
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════════════════════════════════════════════════════════
+   U. EXPERIENCES SECTION — card grid clamp for 2560px
+   ═══════════════════════════════════════════════════════════════════════ */
 .exp-card {
   min-width: 0;
   overflow: hidden;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   V. MAP PIN LABELS â€” scale down on 1024-1279px to prevent crowding
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════════════════════════════════════════════════════════
+   V. MAP PIN LABELS — scale down on 1024-1279px to prevent crowding
+   ═══════════════════════════════════════════════════════════════════════ */
 @media (max-width: 1023px) {
   .map-pin {
     transform: translate(-50%, -50%) scale(0.8) !important;
@@ -4329,25 +4329,25 @@ video:not([class*="w-["]) {
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   W. ROUTE SVG â€” hidden below lg; ensure it never causes overflow
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════════════════════════════════════════════════════════
+   W. ROUTE SVG — hidden below lg; ensure it never causes overflow
+   ═══════════════════════════════════════════════════════════════════════ */
 .route-svg {
   max-width: 100%;
   overflow: visible;
   pointer-events: none;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   X. NAVBAR â€” safe area on notched phones (iPhone 16 Pro Max)
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════════════════════════════════════════════════════════
+   X. NAVBAR — safe area on notched phones (iPhone 16 Pro Max)
+   ═══════════════════════════════════════════════════════════════════════ */
 .site-nav {
   padding-top: max(1.5rem, env(safe-area-inset-top));
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   Y. HERO CONTENT LAYOUT â€” stack on portrait tablets (iPad Air/Pro)
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════════════════════════════════════════════════════════
+   Y. HERO CONTENT LAYOUT — stack on portrait tablets (iPad Air/Pro)
+   ═══════════════════════════════════════════════════════════════════════ */
 @media (max-width: 1023px) {
   /* Hero copy: reduce left/right extreme spread on tablets */
   .hero-text-left h1,
@@ -4369,9 +4369,9 @@ video:not([class*="w-["]) {
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   Z. SECOND SECTION (scroll-through reveal) â€” readable on all devices
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════════════════════════════════════════════════════════
+   Z. SECOND SECTION (scroll-through reveal) — readable on all devices
+   ═══════════════════════════════════════════════════════════════════════ */
 @media (max-width: 767px) {
   .absolute.inset-0.z-30 h2.display-font {
     font-size: clamp(1.05rem, 3.8vw, 1.8rem) !important;
@@ -4380,9 +4380,9 @@ video:not([class*="w-["]) {
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   2560px ULTRA-WIDE SCALE â€” everything proportionally bigger
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════════════════════════════════════════════════════════
+   2560px ULTRA-WIDE SCALE — everything proportionally bigger
+   ═══════════════════════════════════════════════════════════════════════ */
 @media (min-width: 2000px) {
   .eyebrow {
     font-size: 11px;
@@ -4392,13 +4392,13 @@ video:not([class*="w-["]) {
     padding-bottom: 2rem;
   }
   .h-rule {
-    height: 1px; /* stays 1px â€” hairline is intentional */
+    height: 1px; /* stays 1px — hairline is intentional */
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   SMALL PHONE SAFETY â€” 320px (SE, older Androids)
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════════════════════════════════════════════════════════
+   SMALL PHONE SAFETY — 320px (SE, older Androids)
+   ═══════════════════════════════════════════════════════════════════════ */
 @media (max-width: 374px) {
   body {
     /* Prevent text from ever causing horizontal scroll */
@@ -4415,15 +4415,15 @@ video:not([class*="w-["]) {
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   IPAD / TABLET â€” 768px to 1023px
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════════════════════════════════════════════════════════
+   IPAD / TABLET — 768px to 1023px
+   ═══════════════════════════════════════════════════════════════════════ */
 @media (min-width: 768px) and (max-width: 1023px) {
-  /* Manifesto intro on iPad â€” reduce max-width to prevent wide orphan lines */
+  /* Manifesto intro on iPad — reduce max-width to prevent wide orphan lines */
   .manifesto-intro {
     max-width: 90%;
   }
-  /* Destinations corridor â€” postcard wider on iPad */
+  /* Destinations corridor — postcard wider on iPad */
   .chapter-postcard {
     width: clamp(180px, 32vw, 260px) !important;
     max-width: 32vw;
@@ -4436,9 +4436,9 @@ video:not([class*="w-["]) {
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   ABOVE-IMAGE (window top fixture) â€” responsive position
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════════════════════════════════════════════════════════
+   ABOVE-IMAGE (window top fixture) — responsive position
+   ═══════════════════════════════════════════════════════════════════════ */
 /* The aboveImage is positioned via Tailwind inline style in JSX.
    On very small phones clamp(120px, 24vw, 50%) can be too wide. */
 @media (max-width: 374px) {
@@ -4447,7 +4447,7 @@ video:not([class*="w-["]) {
   }
 }
 
-/* â”€â”€ Destinations grid â€” moved from <style jsx> in Destinations.jsx â”€â”€ */
+/* ── Destinations grid — moved from <style jsx> in Destinations.jsx ── */
 .dest-grid-premium {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -4466,13 +4466,13 @@ video:not([class*="w-["]) {
   .dest-grid-premium {
     grid-template-columns: repeat(1, 1fr);
   }
-}/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   DESTINATION CARD â€” PREMIUM 3D FLIP
+}/* ═══════════════════════════════════════════════════════════════════════
+   DESTINATION CARD — PREMIUM 3D FLIP
    Append-only addition. Touches nothing above this block.
    Scoped entirely to .dc-flip-* classes living inside .dest-card, so the
    existing .dest-card / .dest-img-el / .dest-grid-premium rules above are
    completely unaffected.
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   ═══════════════════════════════════════════════════════════════════════ */
 
 
 

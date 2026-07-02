@@ -1,19 +1,12 @@
 import "./globals.css";
 import LenisProvider from "./providers/LenisProvider";
 import DebugMeasurer from "@/components/DebugMeasurer";
-import { DM_Sans, Cormorant_Garamond } from 'next/font/google';
+import { Open_Sans } from 'next/font/google';
 
-const dmSans = DM_Sans({
+const openSans = Open_Sans({
   subsets: ['latin'],
+  variable: '--font-open-sans',
   display: 'swap',
-  variable: '--font-sans',
-});
-
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  display: 'swap',
-  variable: '--font-cormorant',
 });
 
 export const metadata = {
@@ -55,7 +48,7 @@ export default function RootLayout({ children }) {
   };
 
   return (
-    <html lang="en" className={`${dmSans.variable} ${cormorant.variable}`}>
+    <html lang="en" className={openSans.variable}>
       <head>
         <script
           type="application/ld+json"

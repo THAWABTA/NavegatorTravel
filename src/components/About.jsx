@@ -5,7 +5,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import SplitType from 'split-type';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowUpRight, Quote, ChevronLeft, ChevronRight, Sparkles, KeyRound, Compass, Headset } from 'lucide-react';
+import { ArrowUpRight, Sparkles, KeyRound, Compass, Headset } from 'lucide-react';
 import ConciergeSection from './ConciergeSection';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -15,25 +15,44 @@ import { DESTINATIONS } from '../data/destinations';
 const featuredDestinations = DESTINATIONS.filter(d => d.featured && d.img);
 const secondaryDestinations = DESTINATIONS.filter(d => d.secondary && d.img);
 
-const testimonials = [
-  { quote: "The most extraordinary journey of our lives. Every detail felt considered, from the first email to the final sunset.", name: "Sarah & James Williams", location: "London", img: "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=400&q=80" },
-  { quote: "Navigator turned our anniversary into something we'll talk about for the rest of our lives. Effortless, warm, unforgettable.", name: "Lina Haddad", location: "Amman", img: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&q=80" },
-  { quote: "From Istanbul to Dubai in a single seamless trip — every transfer, every stay, perfectly timed. True concierge travel.", name: "Omar Al-Farsi", location: "Dubai", img: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&q=80" },
-];
-
 const mapPins = [
-  { label: "Istanbul",        top: "32%", left: "53%" },
-  { label: "Dubai",           top: "48%", left: "63%" },
-  { label: "Trabzon",         top: "30%", left: "58%" },
-  { label: "Sharm El Sheikh", top: "46%", left: "58%" },
-  { label: "Tbilisi",         top: "29%", left: "60%" },
-  { label: "Batumi",          top: "30%", left: "59%" },
-  { label: "Antalya",         top: "35%", left: "52%" },
-  { label: "Sri Lanka",       top: "58%", left: "68%" },
-  { label: "Phuket",          top: "62%", left: "76%" },
-  { label: "Kuala Lumpur",    top: "63%", left: "78%" },
-  { label: "Cairo",           top: "40%", left: "57%" },
-  { label: "Baku",            top: "31%", left: "62%" },
+  // Europe
+  { label: "London", top: "22%", left: "41%", labelStyle: { bottom: '100%', marginBottom: '6px', left: '50%', transform: 'translateX(-50%)' } },
+  { label: "Rome", top: "31%", left: "45%", labelStyle: { bottom: '100%', marginBottom: '6px', left: '50%', transform: 'translateX(-50%)' } },
+  { label: "Pristina", top: "29%", left: "50%", labelStyle: { bottom: '100%', marginBottom: '6px', left: '50%', transform: 'translateX(-50%)' } },
+  
+  // Turkey & Caucasus
+  { label: "Istanbul", top: "32%", left: "53%", labelStyle: { bottom: '100%', right: '50%', marginBottom: '6px', marginRight: '4px' } },
+  { label: "Marmaris", top: "36%", left: "51%", labelStyle: { top: '100%', right: '50%', marginTop: '6px', marginRight: '4px' } },
+  { label: "Fethiye", top: "36.5%", left: "51.5%", labelStyle: { top: '100%', left: '50%', marginTop: '6px', marginLeft: '4px' } },
+  { label: "Antalya", top: "35%", left: "52%", labelStyle: { bottom: '100%', left: '50%', transform: 'translateX(-50%)', marginBottom: '6px' } },
+  { label: "Trabzon", top: "30%", left: "58%", labelStyle: { bottom: '100%', left: '50%', transform: 'translateX(-50%)', marginBottom: '6px' } },
+  { label: "Sochi", top: "27%", left: "56%", labelStyle: { bottom: '100%', left: '50%', transform: 'translateX(-50%)', marginBottom: '6px' } },
+  { label: "Batumi", top: "30%", left: "59%", labelStyle: { top: '100%', left: '50%', transform: 'translateX(-50%)', marginTop: '6px' } },
+  { label: "Tbilisi", top: "29%", left: "60%", labelStyle: { bottom: '100%', left: '50%', transform: 'translateX(-50%)', marginBottom: '6px' } },
+  { label: "Yerevan", top: "31%", left: "60%", labelStyle: { top: '100%', left: '50%', transform: 'translateX(-50%)', marginTop: '6px' } },
+  { label: "Baku", top: "31%", left: "62%", labelStyle: { top: '50%', left: '100%', transform: 'translateY(-50%)', marginLeft: '6px' } },
+  
+  // Middle East & Egypt
+  { label: "Beirut", top: "38%", left: "54%", labelStyle: { top: '50%', left: '100%', transform: 'translateY(-50%)', marginLeft: '6px' } },
+  { label: "Cairo", top: "40%", left: "57%", labelStyle: { top: '50%', right: '100%', transform: 'translateY(-50%)', marginRight: '6px' } },
+  { label: "Sharm El Sheikh", top: "46%", left: "58%", labelStyle: { top: '50%', left: '100%', transform: 'translateY(-50%)', marginLeft: '6px' } },
+  { label: "Hurghada", top: "48%", left: "57%", labelStyle: { top: '50%', right: '100%', transform: 'translateY(-50%)', marginRight: '6px' } },
+  { label: "Doha", top: "47%", left: "61%", labelStyle: { top: '50%', right: '100%', transform: 'translateY(-50%)', marginRight: '6px' } },
+  { label: "Dubai", top: "48%", left: "63%", labelStyle: { top: '50%', left: '100%', transform: 'translateY(-50%)', marginLeft: '6px' } },
+  
+  // Asia
+  { label: "Maldives", top: "62%", left: "66%", labelStyle: { top: '100%', left: '50%', transform: 'translateX(-50%)', marginTop: '6px' } },
+  { label: "Sri Lanka", top: "58%", left: "68%", labelStyle: { top: '100%', left: '50%', transform: 'translateX(-50%)', marginTop: '6px' } },
+  { label: "Thailand", top: "54%", left: "76%", labelStyle: { bottom: '100%', left: '50%', transform: 'translateX(-50%)', marginBottom: '6px' } },
+  { label: "Bangkok", top: "58%", left: "76%", labelStyle: { top: '50%', right: '100%', transform: 'translateY(-50%)', marginRight: '6px' } },
+  { label: "Vietnam", top: "56%", left: "79%", labelStyle: { top: '50%', left: '100%', transform: 'translateY(-50%)', marginLeft: '6px' } },
+  { label: "Phuket", top: "62%", left: "76%", labelStyle: { top: '50%', left: '100%', transform: 'translateY(-50%)', marginLeft: '6px' } },
+  { label: "Langkawi", top: "61%", left: "77%", labelStyle: { bottom: '100%', left: '50%', transform: 'translateX(-50%)', marginBottom: '6px' } },
+  { label: "Kuala Lumpur", top: "63%", left: "78%", labelStyle: { top: '50%', left: '100%', transform: 'translateY(-50%)', marginLeft: '6px' } },
+  { label: "Malaysia", top: "62%", left: "82%", labelStyle: { top: '100%', left: '50%', transform: 'translateX(-50%)', marginTop: '6px' } },
+  { label: "Indonesia", top: "66%", left: "78%", labelStyle: { top: '50%', right: '100%', transform: 'translateY(-50%)', marginRight: '6px' } },
+  { label: "Bali", top: "68%", left: "81%", labelStyle: { top: '100%', left: '50%', transform: 'translateX(-50%)', marginTop: '6px' } }
 ];
 
 function measureCenter(rect, originRect) {
@@ -521,7 +540,7 @@ const About = () => {
     };
   }, { scope: rootRef });
 
-  // ─── EXP CARDS / MAP PINS / TESTIMONIALS / CTA ───────────────────────────
+  // ─── EXP CARDS / MAP PINS / CTA ───────────────────────────
   useGSAP(() => {
     rootRef.current.querySelectorAll('.exp-card').forEach((el, i) => {
       gsap.fromTo(el,
@@ -538,15 +557,6 @@ const About = () => {
           delay: i * 0.05, scrollTrigger: { trigger: el.closest('.map-section'), start: 'top 75%' } }
       );
     });
-
-    const testimonialBlock = rootRef.current.querySelector('.testimonial-block');
-    if (testimonialBlock) {
-      gsap.fromTo(testimonialBlock,
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out',
-          scrollTrigger: { trigger: testimonialBlock, start: 'top 80%' } }
-      );
-    }
 
     const ctaScene = rootRef.current.querySelector('.final-cta-scene');
     if (ctaScene) {
@@ -833,61 +843,6 @@ const About = () => {
       });
     })();
 
-    // ── Testimonials ──────────────────────────────────────────────────────
-    (() => {
-      const section   = root.querySelector('.testimonial-section');
-      if (!section) return;
-      const block     = section.querySelector('.testimonial-block');
-      const quoteIco  = block?.querySelector('svg');
-      const photoWrap = block?.querySelector('.w-12.h-12');
-      const gridItems = Array.from(block?.querySelectorAll('.grid > div') ?? []);
-      const arrows    = Array.from(section.querySelectorAll('button'));
-      if (!block) return;
-      const sceneTl = gsap.timeline({
-        scrollTrigger: { trigger: block, start: 'top 80%', toggleActions: 'play none none none' },
-        defaults: { ease: E.entry },
-      });
-      if (quoteIco)  sceneTl.fromTo(quoteIco,  { opacity: 0, y: -8, scale: 0.8 },   { opacity: 1, y: 0, scale: 1, duration: M.reveal.mid, ease: E.spring }, 0.1);
-      if (photoWrap) sceneTl.fromTo(photoWrap, { opacity: 0, x: -18, scale: 0.85 }, { opacity: 1, x: 0, scale: 1, duration: M.reveal.mid, ease: E.spring }, 0.52);
-      gridItems.forEach((item, i) => {
-        sceneTl.fromTo(item,
-          { opacity: 0, scale: 0.86, y: jitter(i, 30, 10, 20) },
-          { opacity: 1, scale: 1, y: 0, duration: M.reveal.mid, ease: E.spring },
-          0.18 + i * jitter(i, 31, 0.08, 0.14)
-        );
-      });
-      if (quoteIco) {
-        gsap.to(quoteIco, {
-          y: jitter(0, 32, -2.5, -4),
-          duration: jitter(0, 33, M.micro.min + 1, M.micro.min + 3),
-          ease: E.ambient, yoyo: true, repeat: -1, delay: M.reveal.slow,
-        });
-      }
-      arrows.forEach((btn, i) => {
-        const icon = btn.querySelector('svg');
-        const dir  = i === 0 ? -1 : 1;
-        const handleEnter = () => {
-          gsap.to(btn,  { scale: 1.14, borderColor: 'var(--accent)', duration: M.hover.fast, ease: 'back.out(2.4)', overwrite: 'auto' });
-          if (icon) gsap.to(icon, { x: dir * 4, duration: M.hover.mid, ease: E.entry, overwrite: 'auto' });
-        };
-        const handleLeave = () => {
-          gsap.to(btn,  { scale: 1, borderColor: 'var(--line)', duration: M.hover.slow, ease: E.settle, overwrite: 'auto' });
-          if (icon) gsap.to(icon, { x: 0, duration: M.hover.slow, ease: E.settle, overwrite: 'auto' });
-        };
-        const handleDown = () => gsap.to(btn, { scale: 0.94, duration: 0.1, ease: 'power2.in', overwrite: 'auto' });
-        const handleUp   = () => gsap.to(btn, { scale: 1, duration: M.hover.mid, ease: 'back.out(3)', overwrite: 'auto' });
-        btn.addEventListener('mouseenter',  handleEnter);
-        btn.addEventListener('mouseleave',  handleLeave);
-        btn.addEventListener('mousedown',   handleDown);
-        btn.addEventListener('mouseup',     handleUp);
-        luxCleanups.push(() => {
-          btn.removeEventListener('mouseenter',  handleEnter);
-          btn.removeEventListener('mouseleave',  handleLeave);
-          btn.removeEventListener('mousedown',   handleDown);
-          btn.removeEventListener('mouseup',     handleUp);
-        });
-      });
-    })();
 
     // ── Contact ───────────────────────────────────────────────────────────
     (() => {
@@ -1059,10 +1014,10 @@ const About = () => {
         <div className="philosophy-list mt-24 lg:mt-32">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-b" style={{ borderColor: 'var(--line)' }}>
             {[
-              { num: '01', icon: Sparkles, title: 'Curated Experiences', desc: 'Every itinerary is composed, never templated — built around what moves you.' },
-              { num: '02', icon: KeyRound, title: 'Private Access',      desc: 'Doors that stay closed to the public open quietly, simply because we ask.' },
-              { num: '03', icon: Compass,  title: 'Seamless Journeys',   desc: 'Every transfer, stay, and arrival timed so the only thing you notice is the view.' },
-              { num: '04', icon: Headset,  title: 'Personal Concierge',  desc: 'One dedicated voice, available before, during, and long after you return.' },
+              { num: '01', icon: Sparkles, title: 'Hony Moon', desc: 'Every itinerary is composed, never templated — built around what moves you.' },
+              { num: '02', icon: KeyRound, title: 'Leisure Travel',      desc: 'Doors that stay closed to the public open quietly, simply because we ask.' },
+              { num: '03', icon: Compass,  title: 'Family Travel',   desc: 'Every transfer, stay, and arrival timed so the only thing you notice is the view.' },
+              { num: '04', icon: Headset,  title: 'Solo Travel',  desc: 'One dedicated voice, available before, during, and long after you return.' },
             ].map((item) => (
               <div
                 key={item.num}
@@ -1175,53 +1130,16 @@ const About = () => {
         <div className="relative w-full aspect-[16/9] sm:aspect-[2/1] rounded-sm overflow-hidden" style={{ background: 'var(--bg-soft)', border: '1px solid var(--line)' }}>
           <Image src="https://upload.wikimedia.org/wikipedia/commons/8/83/Equirectangular_projection_SW.jpg" alt="World map" fill sizes="100vw" loading="lazy" className="object-cover opacity-30" />
           {mapPins.map((p, i) => (
-            <div key={`${p.label}-${i}`} className="map-pin absolute flex flex-col items-center" style={{ top: p.top, left: p.left, transform: 'translate(-50%, -50%)' }}>
+            <div key={`${p.label}-${i}`} className="map-pin absolute flex justify-center items-center" style={{ top: p.top, left: p.left, transform: 'translate(-50%, -50%)', width: '8px', height: '8px' }}>
               <span className="block w-2 h-2 rounded-full" style={{ background: 'var(--accent)' }} />
-              <span className="eyebrow mt-2 text-[var(--ink)] whitespace-nowrap">{p.label}</span>
+              <span className="eyebrow text-[var(--ink)] whitespace-nowrap absolute" style={p.labelStyle || { top: '100%', left: '50%', transform: 'translateX(-50%)', marginTop: '6px' }}>
+                {p.label}
+              </span>
             </div>
           ))}
         </div>
       </section>
 
-      <div className="h-rule mx-6 sm:mx-16 lg:mx-24" />
-
-      <section className="testimonial-section px-6 sm:px-16 lg:px-24 py-24 lg:py-36" style={{ background: 'var(--bg-soft)' }}>
-        <div className="testimonial-block grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          <div className="lg:col-span-8">
-            <p data-text-eyebrow className="eyebrow text-[var(--accent)] mb-6">Travelers love Navigator</p>
-            <Quote size={36} strokeWidth={1} className="text-[var(--accent-soft)] mb-6" />
-            <p data-text-heading className="display-font text-[clamp(1.8rem,4vw,3.2rem)] font-light leading-[1.3] text-[var(--ink)] italic">
-              &ldquo;{testimonials[0].quote}&rdquo;
-            </p>
-            <div className="mt-10 flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full overflow-hidden">
-                <Image src={testimonials[0].img} alt={testimonials[0].name} width={100} height={100} loading="lazy" className="w-full h-full object-cover" />
-              </div>
-              <div>
-                <p data-text-eyebrow className="eyebrow text-[var(--ink)]">{testimonials[0].name}</p>
-                <p data-text-body className="text-xs text-[var(--ink-faint)] mt-1">{testimonials[0].location}</p>
-              </div>
-            </div>
-          </div>
-          <div className="lg:col-span-4 flex flex-col gap-6">
-            <div className="grid grid-cols-2 gap-3">
-              {featuredDestinations.slice(0, 4).map((d) => (
-                <div key={d.name} className="aspect-square overflow-hidden rounded-sm">
-                  <Image src={d.img} alt={d.name} fill loading="lazy" sizes="20vw" className="object-cover" />
-                </div>
-              ))}
-            </div>
-            <div className="flex items-center justify-end gap-3">
-              <button aria-label="Previous Slide" className="btn-ui-icon border border-[var(--line)] text-[var(--ink)] hover:border-[var(--accent)] hover:text-[var(--accent)]">
-                <ChevronLeft size={18} />
-              </button>
-              <button aria-label="Next Slide" className="btn-ui-icon border border-[var(--line)] text-[var(--ink)] hover:border-[var(--accent)] hover:text-[var(--accent)]">
-                <ChevronRight size={18} />
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <ConciergeSection />
 
@@ -1253,7 +1171,7 @@ const About = () => {
           </div>
           <div className="h-rule" />
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <p className="text-[10px] text-[var(--ink-faint)] tracking-widest uppercase">© 2025 Navigator Travel. All experiences reserved.</p>
+            <p className="text-[10px] text-[var(--ink-faint)] tracking-widest uppercase">© 2021 AL MALLAH FOR TRAVEL & TOURISM L.L.C. ALL EXPERIENCES RESERVED.</p>
             <div className="flex items-center gap-5 text-[10px] text-[var(--ink-faint)] tracking-widest uppercase">
               <a href="#" className="hover:text-[var(--accent)] transition-colors">Privacy</a>
               <a href="#" className="hover:text-[var(--accent)] transition-colors">Terms</a>
