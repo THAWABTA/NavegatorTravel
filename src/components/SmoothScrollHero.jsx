@@ -376,7 +376,6 @@ const SmoothScrollHero = () => {
                 className="absolute inset-0 w-full h-full object-cover scale-100 lg:scale-[1.3] z-10"
                 style={{ transform: 'translateZ(0)', backfaceVisibility: 'hidden' }}
                 src="/video/hero.mp4"
-                poster="/pic/hero-bg.webp"
                 autoPlay
                 muted
                 loop
