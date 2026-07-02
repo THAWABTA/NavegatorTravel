@@ -1020,12 +1020,7 @@ const About = () => {
       <section id="about" className="px-6 sm:px-16 lg:px-24 py-28 lg:py-40">
         <div className="manifesto-intro max-w-4xl mx-auto text-center flex flex-col items-center gap-8">
           <div className="flex items-center gap-3">
-            <div className="grow-line-wrap h-[1px] w-10">
-              <span className="grow-line" style={{ background: 'var(--accent)' }} />
-              <span className="grow-line-glow" />
-            </div>
             <span data-text-eyebrow className="display-font italic text-[var(--accent)] text-sm tracking-widest">ABOUT Navigator</span>
-            <div className="grow-line-right h-[1px]" style={{ width: 0, background: 'var(--accent)' }} />
           </div>
           <p data-text-heading className="display-font text-[clamp(2.6rem,7vw,6rem)] font-light leading-[1.08] text-[var(--ink)]">
             The world was never meant to be seen <span className="italic">through a screen.</span>
