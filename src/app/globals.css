@@ -4180,6 +4180,9 @@ video:not([class*="w-["]) {
 .word-mask {
   display: block;
   overflow: hidden;
+  /* Expand the clipping boundary horizontally to prevent clipping italic overhangs/slants */
+  padding: 0 0.25em;
+  margin: 0 -0.25em;
   /* On very narrow phones the word can be wider than available area */
   max-width: 100%;
 }
