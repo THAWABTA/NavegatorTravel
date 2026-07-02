@@ -879,7 +879,7 @@ function DestinationsGrid({ gridRef }) {
               key={dest.id}
               dest={dest}
               cardRef={el => { cardRefs.current[i] = el; }}
-              isPriority={i < 4}
+              isPriority={false}
             />
           ))}
         </div>
@@ -1184,30 +1184,36 @@ const Destinations = () => {
 
     let killed = false;
     let tickerFn = null;
-
     let ro = null;
 
-    buildGlobe(canvas).then(state => {
-      if (killed) { state.dispose(); return; }
-      globeState.current = state;
+    const initGlobe = () => {
+      if (killed || globeState.current) return;
+      buildGlobe(canvas).then(state => {
+        if (killed) { state.dispose(); return; }
+        globeState.current = state;
 
-      let idleRotation = 0;
-      tickerFn = () => {
-        if (!state.globe.rotation._scrollControlled) {
-          idleRotation += 0.00055;
-          state.globe.rotation.y = idleRotation;
-          state.clouds.rotation.y = idleRotation * 0.85;
-          state.tickIdle();
-        }
-      };
-      gsap.ticker.add(tickerFn);
+        let idleRotation = 0;
+        tickerFn = () => {
+          if (!state.globe.rotation._scrollControlled) {
+            idleRotation += 0.00055;
+            state.globe.rotation.y = idleRotation;
+            state.clouds.rotation.y = idleRotation * 0.85;
+            state.tickIdle();
+          }
+        };
+        gsap.ticker.add(tickerFn);
 
-      ro = new ResizeObserver(() => requestAnimationFrame(() => state.resize()));
-      ro.observe(canvas.parentElement || canvas);
-    });
+        ro = new ResizeObserver(() => requestAnimationFrame(() => state.resize()));
+        ro.observe(canvas.parentElement || canvas);
+      });
+    };
+
+    // Defer heavy 3D parsing/texture loading to clear main-thread for LCP
+    const timer = setTimeout(initGlobe, 800);
 
     return () => {
       killed = true;
+      clearTimeout(timer);
       if (tickerFn) gsap.ticker.remove(tickerFn);
       if (ro) ro.disconnect();
       if (globeState.current) { globeState.current.dispose(); globeState.current = null; }
