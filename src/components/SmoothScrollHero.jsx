@@ -394,7 +394,7 @@ const SmoothScrollHero = () => {
               {/* Window frame outer */}
               <Image src={outerImage} priority fetchPriority="high" alt="window frame" fill sizes="100vw" className="object-cover scale-100 lg:scale-[1.3] z-30" quality={100} style={{ transform: 'translateZ(0)', backfaceVisibility: 'hidden' }} />
               {/* Window top fixture */}
-              <div className="absolute top-[21%] left-[50%] md:top-[10%] md:left-[50.3%] -translate-x-1/2 h-auto z-10" style={{ width: 'clamp(120px, 24vw, 50%)' }}>
+              <div className="absolute top-[22%] left-[50%] md:top-[10%] md:left-[50.3%] -translate-x-1/2 h-auto z-10" style={{ width: 'clamp(120px, 24vw, 50%)' }}>
                 <Image src={aboveImage} priority fetchPriority="high" alt="window top" width={400} height={200} sizes="(max-width: 768px) 50vw, 400px" className="object-contain" quality={100} />
               </div>
             </div>
