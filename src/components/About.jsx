@@ -1014,10 +1014,10 @@ const About = () => {
         <div className="philosophy-list mt-24 lg:mt-32">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-b" style={{ borderColor: 'var(--line)' }}>
             {[
-              { num: '01', icon: Sparkles, title: 'Hony Moon', desc: 'Every itinerary is composed, never templated — built around what moves you.' },
-              { num: '02', icon: KeyRound, title: 'Leisure Travel',      desc: 'Doors that stay closed to the public open quietly, simply because we ask.' },
-              { num: '03', icon: Compass,  title: 'Family Travel',   desc: 'Every transfer, stay, and arrival timed so the only thing you notice is the view.' },
-              { num: '04', icon: Headset,  title: 'Solo Travel',  desc: 'One dedicated voice, available before, during, and long after you return.' },
+              { num: '01', title: 'Honeymoon', desc: 'Every itinerary is composed, never templated — built around what moves you.' },
+              { num: '02', title: 'Leisure Travel',      desc: 'Doors that stay closed to the public open quietly, simply because we ask.' },
+              { num: '03', title: 'Family Travel',   desc: 'Every transfer, stay, and arrival timed so the only thing you notice is the view.' },
+              { num: '04', title: 'Solo Travel',  desc: 'One dedicated voice, available before, during, and long after you return.' },
             ].map((item) => (
               <div
                 key={item.num}
@@ -1028,8 +1028,7 @@ const About = () => {
                   style={{ fontSize: 'clamp(2.4rem,4vw,3.4rem)', color: 'transparent', WebkitTextStroke: '1px var(--gold-soft)' }}>
                   {item.num}
                 </span>
-                <item.icon size={26} strokeWidth={1.25} className="text-[var(--accent)] shrink-0" />
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 mt-2">
                   <h3 className="philosophy-title display-font text-[clamp(1.5rem,2.4vw,2.1rem)] font-light text-[var(--ink)] leading-tight">{item.title}</h3>
                   <p className="text-sm text-[var(--ink-soft)] leading-7 font-light">{item.desc}</p>
                 </div>

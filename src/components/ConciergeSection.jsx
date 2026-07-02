@@ -69,7 +69,7 @@ const CONTACTS = [
     id: 'instagram',
     Icon: IconBrandInstagram,
     label: 'Instagram',
-    value: '@navigator.travel',
+    value: '@nttjordan',
     desc: 'Follow our latest journeys',
     href: 'https://www.instagram.com/nttjordan',
   },
@@ -101,7 +101,7 @@ const CONTACTS = [
     id: 'whatsapp',
     Icon: IconBrandWhatsapp,
     label: 'WhatsApp',
-    value: 'Direct Luxury Concierge',
+    value: 'Direct Concierge',
     desc: 'Instant Assistance',
     href: 'https://wa.me/962792227711',
   },
@@ -292,10 +292,10 @@ export default function ConciergeSection() {
             <span>Private Travel Concierge</span>
           </div>
 
-          <h2 className="cc-hero-heading" aria-label="Your journey begins with a conversation.">
+          <h2 className="cc-hero-heading" aria-label="Your journey begins with us.">
             <span className="cc-line"><span className="cc-line-inner">Your journey</span></span>
-            <span className="cc-line"><span className="cc-line-inner">begins with a</span></span>
-            <span className="cc-line cc-line--italic"><span className="cc-line-inner">conversation.</span></span>
+            <span className="cc-line"><span className="cc-line-inner">begins with</span></span>
+            <span className="cc-line cc-line--italic"><span className="cc-line-inner">us.</span></span>
           </h2>
 
           <p className="cc-hero-desc">
@@ -359,7 +359,6 @@ export default function ConciergeSection() {
             Get in Touch
           </span>
           <h2 className="cc-contacts-heading">
-            <span className="cc-contacts-line">Luxury</span>
             <span className="cc-contacts-line cc-contacts-line--italic">Contact</span>
           </h2>
           <p className="cc-contacts-sub">

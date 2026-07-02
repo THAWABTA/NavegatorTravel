@@ -9,7 +9,7 @@ export const DESTINATIONS = [
   },
   { 
     id: "dubai", name: "Dubai", region: "UAE", 
-    lat: 25.2048, lon: 55.2708, tag: "Luxury", 
+    lat: 25.2048, lon: 55.2708, tag: "Exclusive", 
     img: "/pic/dubai2.jpg.jpeg", 
     desc: "A futuristic skyline rising from golden dunes — the height of modern indulgence and design.",
     featured: true

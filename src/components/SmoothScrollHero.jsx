@@ -276,7 +276,7 @@ const SmoothScrollHero = () => {
       { scale: 1, opacity: 1, filter: "blur(0px)", duration: 1.8, ease: "power3.out", delay: 0.3 }
     );
 
-    // ─── Luxury hover interaction on the window scene itself ─────────────
+    // ─── Premium hover interaction on the window scene itself ─────────────
     const windowScene = scopeRef.current?.querySelector('.window-scene');
     if (windowScene) {
       const handleEnter = () => gsap.to(windowScene, { scale: 1.015, duration: 1.2, ease: "power3.out" });

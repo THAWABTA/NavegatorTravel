@@ -1,6 +1,6 @@
-# 🛩️ Jesko Jets - Luxury Aviation Experience
+# 🛩️ Jesko Jets - Premium Aviation Experience
 
-Jesko Jets is a high-end, animated landing page designed for a private aviation operator. It offers a seamless and visually stunning journey through the world of luxury travel, leveraging advanced scroll-based animations to create a premium digital experience.
+Jesko Jets is a high-end, animated landing page designed for a private aviation operator. It offers a seamless and visually stunning journey through the world of exclusive travel, leveraging advanced scroll-based animations to create a premium digital experience.
 
 <img width="1920" height="1080" alt="Screenshot (250)" src="https://github.com/user-attachments/assets/3ceb8b9c-525f-4a2b-b1b5-8b81a4e0b5fc" />
 
