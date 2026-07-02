@@ -539,10 +539,11 @@ function DestCard({ dest, cardRef, isPriority }) {
               inset: 0,
               backfaceVisibility: "hidden",
               WebkitBackfaceVisibility: "hidden",
+              transform: "translateZ(1px)",
               borderRadius: "18px"
             }}
           >
-            <div style={{ position: "absolute", inset: 0 }}>
+            <div style={{ position: "absolute", inset: 0, backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}>
               <Image
                 className="dc-img"
                 src={dest.img}
@@ -566,6 +567,8 @@ function DestCard({ dest, cardRef, isPriority }) {
               background: "linear-gradient(to top, rgba(26,23,20,0.5) 0%, rgba(26,23,20,0) 40%)",
               pointerEvents: "none",
               zIndex: 2,
+              backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
             }} />
 
             <div
@@ -578,6 +581,8 @@ function DestCard({ dest, cardRef, isPriority }) {
                 pointerEvents: "none",
                 zIndex: 3,
                 willChange: "opacity",
+                backfaceVisibility: "hidden",
+                WebkitBackfaceVisibility: "hidden",
               }}
             />
 
@@ -594,6 +599,9 @@ function DestCard({ dest, cardRef, isPriority }) {
                 display: "flex",
                 flexDirection: "column",
                 gap: 0,
+                transform: "translateZ(1px)",
+                backfaceVisibility: "hidden",
+                WebkitBackfaceVisibility: "hidden",
               }}
             >
               <p style={{
