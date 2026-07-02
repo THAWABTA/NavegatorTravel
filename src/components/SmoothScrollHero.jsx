@@ -26,7 +26,12 @@ const setTheme = (light) => {
 
 gsap.registerPlugin(ScrollTrigger);
 
+import { preload } from 'react-dom';
+
 const SmoothScrollHero = () => {
+  // Preload CSS background images to fix "late discovery" network dependency issue
+  preload(cloudsImage.src, { as: 'image', fetchPriority: 'high' });
+
   const scopeRef = useRef(null);
   const mainContainer = useRef(null);
   const windowRef = useRef(null);
@@ -306,7 +311,7 @@ const SmoothScrollHero = () => {
 
         {/* Sky background — fixed only behind the pinned hero, fades out as cream content rises */}
         <div ref={skyRef} className="fixed inset-0 -z-50" style={{ transform: 'translate3d(0,0,0)' }}>
-          <Image src={skyImage} alt="sky" fill sizes="100vw" className="object-cover object-bottom" priority quality={100} />
+          <Image src={skyImage} alt="sky" fill sizes="100vw" className="object-cover object-bottom" priority fetchPriority="high" quality={100} />
         </div>
 
         {/* Cloud layer — multi-depth parallax */}
@@ -385,12 +390,12 @@ const SmoothScrollHero = () => {
                 tabIndex={-1}
               />
               {/* Atmospheric shadow / depth */}
-              <Image src={shadowImage} priority alt="shadow" fill sizes="100vw" className="object-cover scale-100 lg:scale-[1.3] opacity-50 z-20" quality={100} style={{ transform: 'translateZ(0)', backfaceVisibility: 'hidden' }} />
+              <Image src={shadowImage} priority fetchPriority="high" alt="shadow" fill sizes="100vw" className="object-cover scale-100 lg:scale-[1.3] opacity-50 z-20" quality={100} style={{ transform: 'translateZ(0)', backfaceVisibility: 'hidden' }} />
               {/* Window frame outer */}
-              <Image src={outerImage} priority alt="window frame" fill sizes="100vw" className="object-cover scale-100 lg:scale-[1.3] z-30" quality={100} style={{ transform: 'translateZ(0)', backfaceVisibility: 'hidden' }} />
+              <Image src={outerImage} priority fetchPriority="high" alt="window frame" fill sizes="100vw" className="object-cover scale-100 lg:scale-[1.3] z-30" quality={100} style={{ transform: 'translateZ(0)', backfaceVisibility: 'hidden' }} />
               {/* Window top fixture */}
               <div className="absolute top-[22.5%] left-[50%] md:top-[10%] md:left-[50.3%] -translate-x-1/2 h-auto z-10" style={{ width: 'clamp(120px, 24vw, 50%)' }}>
-                <Image src={aboveImage} priority alt="window top" width={400} height={200} className="object-contain" quality={100} />
+                <Image src={aboveImage} priority fetchPriority="high" alt="window top" width={400} height={200} sizes="(max-width: 768px) 50vw, 400px" className="object-contain" quality={100} />
               </div>
             </div>
           </div>
