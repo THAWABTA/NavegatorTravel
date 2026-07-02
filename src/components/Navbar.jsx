@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const Navbar = () => {
   const [navTheme, setNavTheme] = useState("dark");
@@ -51,8 +52,8 @@ const Navbar = () => {
     isDestinations 
       ? { text: "HOME", href: "/" }
       : { text: "DESTINATIONS", href: "/destinations" },
-    { text: "ABOUT",        href: "#about" },
-    { text: "CONTACT",      href: "#contact" },
+    { text: "ABOUT",        href: "/#about" },
+    { text: "CONTACT",      href: "/#contact" },
   ];
 
   return (
@@ -116,13 +117,13 @@ const Navbar = () => {
             {navLinks.map((l) => {
               const isActive = pathname === l.href;
               return (
-                <a
+                <Link
                   key={l.text}
                   href={l.href}
                   className={`glass-nav-item ${isActive ? "is-active" : ""}`}
                 >
                   {l.text}
-                </a>
+                </Link>
               );
             })}
           </div>
@@ -143,14 +144,14 @@ const Navbar = () => {
               {navLinks.map((l) => {
                 const isActive = pathname === l.href;
                 return (
-                  <a
+                  <Link
                     key={l.text}
                     href={l.href}
                     onClick={() => setIsOpen(false)}
                     className={`glass-nav-item w-full text-left !px-6 !py-3 ${isActive ? "is-active" : ""}`}
                   >
                     {l.text}
-                  </a>
+                  </Link>
                 );
               })}
             </div>
