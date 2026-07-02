@@ -1393,7 +1393,7 @@ const Destinations = () => {
             </p>
             <h1 className="display-font font-light leading-none" style={{ fontSize: "clamp(2.8rem,9vw,8rem)", color: "#fff" }}>
               {["The", "Journey", "Begins"].map(word => (
-                <span key={word} className="block" style={{ overflow: "hidden" }}>
+                <span key={word} className="block" style={{ overflow: "hidden", padding: "0.15em 0.1em", margin: "-0.15em -0.1em" }}>
                   <span className="tkf-word inline-block" style={{ willChange: "transform, filter, opacity" }}>
                     {word === "Journey"
                       ? <em style={{ color: "var(--accent, #c5875a)", fontStyle: "italic" }}>{word}</em>

@@ -109,9 +109,9 @@ const CONTACTS = [
     id: 'phone2',
     Icon: IconPhone,
     label: 'Phone',
-    value: '+962 7 9222 7712',
-    desc: 'Private Concierge',
-    href: 'tel:+962792227712',
+    value: '+962192226611',
+    desc: <span style={{ whiteSpace: 'nowrap', fontSize: 'clamp(8px, 2.5vw, 11px)' }}>Available Sun–Thu 10:00 AM – 6:00 PM</span>,
+    href: 'tel:+962192226611',
   },
 ];
 
