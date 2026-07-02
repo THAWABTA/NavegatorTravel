@@ -65,7 +65,7 @@ const SmoothScrollHero = () => {
     const v = innerVideoRef.current;
     if (!v) return;
     v.muted = true;
-    v.play().catch(() => {});
+    v.play().catch(() => { });
   }, []);
 
   useGSAP(() => {
@@ -125,13 +125,13 @@ const SmoothScrollHero = () => {
 
     // 4. Wordmark travels up — lands at navbar row center
     //    py-6 (24px) on mobile, py-7 (28px) on lg; logo half-height from live DOM
-    const navPadding   = window.innerWidth >= 1024 ? 28 : 24;
-    const logoHalfH    = wordmarkRef.current
+    const navPadding = window.innerWidth >= 1024 ? 28 : 24;
+    const logoHalfH = wordmarkRef.current
       ? wordmarkRef.current.getBoundingClientRect().height / 2
       : 20;
     const navbarCenter = navPadding + logoHalfH;
-    const logoY        = -(window.innerHeight / 2 - navbarCenter);
-    const logoScale    = window.innerWidth < 480
+    const logoY = -(window.innerHeight / 2 - navbarCenter);
+    const logoScale = window.innerWidth < 480
       ? 0.70
       : window.innerWidth < 1024
         ? 0.62
@@ -154,15 +154,15 @@ const SmoothScrollHero = () => {
     //     Each word gets its own 0→1 tween slotted sequentially into tl
     //     during the window where secondSection is on screen (tl labels 9→16).
     //     quickSetter owns every CSS write — no inline style assignments.
-   if (paragraphRef.current) {
+    if (paragraphRef.current) {
       const split = new SplitType(paragraphRef.current, { types: "words, chars" });
       const chars = split.chars;
 
-      const REVEAL_START    = 9.5;
-      const REVEAL_END      = 15.5;
-      const totalRange      = REVEAL_END - REVEAL_START;
-      const N               = chars.length;
-      
+      const REVEAL_START = 9.5;
+      const REVEAL_END = 15.5;
+      const totalRange = REVEAL_END - REVEAL_START;
+      const N = chars.length;
+
       // التأكد من وجود أحرف لتجنب أخطاء العمليات الحسابية
       if (N > 0) {
         const charDuration = (totalRange / N) * 4;
@@ -172,14 +172,14 @@ const SmoothScrollHero = () => {
           const startTime = REVEAL_START + progressRatio * (totalRange - charDuration);
 
           // استخدام fromTo يجبر التايم لاين على الاحتفاظ بحالة الاختفاء تماماً
-       // هنا يكمن السر: نبدأ بشفافية 15% (مثل أكسيوم) بدلاً من 0% ليظهر كإضاءة تمر على النص
-          tl.fromTo(c, 
+          // هنا يكمن السر: نبدأ بشفافية 15% (مثل أكسيوم) بدلاً من 0% ليظهر كإضاءة تمر على النص
+          tl.fromTo(c,
             { opacity: 0.15 },
             {
               opacity: 1,
               duration: charDuration,
               ease: "none"
-            }, 
+            },
             startTime
           );
         });
@@ -215,8 +215,8 @@ const SmoothScrollHero = () => {
       { xPercent: -50, duration: 35, repeat: -1, ease: "none" }
     );
 
-  gsap.fromTo(cloudFarRef.current, 
-      { backgroundPositionX: '0vw' }, 
+    gsap.fromTo(cloudFarRef.current,
+      { backgroundPositionX: '0vw' },
       { backgroundPositionX: '-600vw', duration: 70, repeat: -1, ease: "none" }
     );
     gsap.to(cloudFarRef.current, {
@@ -294,15 +294,15 @@ const SmoothScrollHero = () => {
       {/* Fixed logo that animates up on scroll */}
       <div className="fixed inset-0 flex items-center justify-center z- pointer-events-none">
         <div ref={wordmarkRef}>
-         <Image
-  src="/pic/IMG_4817 copy (12) (1).png"
-  alt="Company Logo"
-  width={400}
-  height={80}
-  priority={true}
-  className="w-auto object-contain"
-  style={{ height: 'clamp(2.5rem, 5vw, 5rem)', maxWidth: '50vw' }}
-/>
+          <Image
+            src="/pic/IMG_4817 copy (12) (1).png"
+            alt="Company Logo"
+            width={400}
+            height={80}
+            priority={true}
+            className="w-auto object-contain"
+            style={{ height: 'clamp(2.5rem, 5vw, 5rem)', maxWidth: '50vw' }}
+          />
         </div>
       </div>
 
@@ -317,21 +317,21 @@ const SmoothScrollHero = () => {
         {/* Cloud layer — multi-depth parallax */}
         <div ref={cloudLayerRef} className="fixed inset-0 -z-40 overflow-hidden pointer-events-none">
           {/* Far layer — slow, faint */}
-         <div
+          <div
             ref={cloudFarRef}
             className="absolute inset-0 h-full w-full" // Locked to viewport
             style={{
               backgroundImage: `url(${cloudsImage.src})`,
               // Convert relative size to viewport units to match original visual scale
               // Desktop: 1500vw * 40% = 600vw. Mobile: 500vw * 40% = 200vw.
-              backgroundSize: 'clamp(200vw, 400vw, 600vw) 90%', 
+              backgroundSize: 'clamp(200vw, 400vw, 600vw) 90%',
               backgroundRepeat: 'repeat-x',
               opacity: 0.25,
               filter: 'blur(2px)',
               // will-change: transform is removed; we are no longer moving the node
             }}
           />
-         
+
           {/* Mid layer — original speed/opacity */}
           <div
             ref={cloudMidRef}
@@ -394,7 +394,7 @@ const SmoothScrollHero = () => {
               {/* Window frame outer */}
               <Image src={outerImage} priority fetchPriority="high" alt="window frame" fill sizes="100vw" className="object-cover scale-100 lg:scale-[1.3] z-30" quality={100} style={{ transform: 'translateZ(0)', backfaceVisibility: 'hidden' }} />
               {/* Window top fixture */}
-              <div className="absolute top-[17%] left-[50%] md:top-[10%] md:left-[50.3%] -translate-x-1/2 h-auto z-10" style={{ width: 'clamp(120px, 24vw, 50%)' }}>
+              <div className="absolute top-[21%] left-[50%] md:top-[10%] md:left-[50.3%] -translate-x-1/2 h-auto z-10" style={{ width: 'clamp(120px, 24vw, 50%)' }}>
                 <Image src={aboveImage} priority fetchPriority="high" alt="window top" width={400} height={200} sizes="(max-width: 768px) 50vw, 400px" className="object-contain" quality={100} />
               </div>
             </div>
@@ -432,8 +432,8 @@ const SmoothScrollHero = () => {
           </div>
 
           {/* Scroll indicator */}
-          <div 
-            className="scroll-indicator absolute z-20 text-white cursor-pointer hover:opacity-80 transition-opacity" 
+          <div
+            className="scroll-indicator absolute z-20 text-white cursor-pointer hover:opacity-80 transition-opacity"
             style={{ bottom: 'clamp(1.5rem, 4vh, 4rem)', right: 'clamp(1rem, 4vw, 4rem)', width: 'clamp(130px, 28vw, 240px)' }}
             onClick={() => {
               const candidates = Array.from(document.querySelectorAll('section, [id]'));
@@ -483,7 +483,7 @@ const SmoothScrollHero = () => {
             style={{ paddingLeft: 'clamp(1.25rem, 5vw, 3rem)', paddingRight: 'clamp(1.25rem, 5vw, 3rem)' }}
           >
             <h2 className="display-font w-full font-light leading-tight sm:leading-snug" style={{ fontSize: 'clamp(1.2rem, 3.5vw, 2.75rem)', maxWidth: 'min(100%, 64rem)' }}>
-              <span className="font-normal">Navigator</span>  
+              <span className="font-normal">Navigator</span>
               <span ref={paragraphRef}>  curates transformative travel to over 180 countries — from hidden villages to skyline suites, from rain forest trails to turquoise coastlines. Your next story begins here.</span>
             </h2>
           </div>
