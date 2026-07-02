@@ -321,7 +321,7 @@ export default function ConciergeSection() {
             <button
               ref={btn1Ref}
               type="button"
-              className="cc-btn cc-btn--primary self-start"
+              className="cc-btn cc-btn--primary w-full sm:w-auto justify-center"
               onClick={openDrawer}
             >
               <span className="cc-btn-text">Begin Your Journey</span>
@@ -334,7 +334,7 @@ export default function ConciergeSection() {
               href="https://wa.me/96279123456"
               target="_blank"
               rel="noopener noreferrer"
-              className="cc-btn cc-btn--ghost"
+              className="cc-btn cc-btn--ghost w-full sm:w-auto justify-center"
             >
               <span className="cc-btn-icon-left"><IconWhatsApp /></span>
               <span className="cc-btn-text">Talk to Concierge</span>
