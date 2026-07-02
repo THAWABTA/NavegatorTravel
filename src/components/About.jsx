@@ -1178,7 +1178,7 @@ const About = () => {
           <h2 data-text-heading className="display-font text-[clamp(2rem,4.5vw,3.5rem)] font-light text-[var(--ink)] leading-none">On the Map</h2>
         </div>
         <div className="relative w-full aspect-[16/9] sm:aspect-[2/1] rounded-sm overflow-hidden" style={{ background: 'var(--bg-soft)', border: '1px solid var(--line)' }}>
-          <Image src="https://upload.wikimedia.org/wikipedia/commons/8/83/Equirectangular_projection_SW.jpg" alt="World map" fill loading="lazy" className="object-cover opacity-30" unoptimized />
+          <Image src="https://upload.wikimedia.org/wikipedia/commons/8/83/Equirectangular_projection_SW.jpg" alt="World map" fill sizes="100vw" loading="lazy" className="object-cover opacity-30" />
           {mapPins.map((p, i) => (
             <div key={`${p.label}-${i}`} className="map-pin absolute flex flex-col items-center" style={{ top: p.top, left: p.left, transform: 'translate(-50%, -50%)' }}>
               <span className="block w-2 h-2 rounded-full" style={{ background: 'var(--accent)' }} />

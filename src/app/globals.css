@@ -2656,16 +2656,16 @@ body {
   background: var(--bg);
   color: var(--ink);
   margin: 0;
-  font-family: DM Sans, sans-serif;
+  font-family: var(--font-sans), sans-serif;
   overflow-x: hidden;
 }
 
 .display-font {
-  font-family: Cormorant Garamond, serif;
+  font-family: var(--font-cormorant), serif;
 }
 
 .body-font {
-  font-family: DM Sans, sans-serif;
+  font-family: var(--font-sans), sans-serif;
 }
 
 .eyebrow {
@@ -2780,7 +2780,7 @@ body.theme-light .wordmark {
 }
 .stat-num {
   color: var(--ink);
-  font-family: Cormorant Garamond, serif;
+  font-family: var(--font-cormorant), serif;
   font-size: clamp(3rem, 7vw, 6rem);
   font-weight: 300;
   line-height: 1;
@@ -3410,16 +3410,16 @@ body {
   background: var(--bg);
   color: var(--ink);
   margin: 0;
-  font-family: DM Sans, sans-serif;
+  font-family: var(--font-sans), sans-serif;
   overflow-x: hidden;
 }
 
 .display-font {
-  font-family: Cormorant Garamond, serif;
+  font-family: var(--font-cormorant), serif;
 }
 
 .body-font {
-  font-family: DM Sans, sans-serif;
+  font-family: var(--font-sans), sans-serif;
 }
 
 .eyebrow {
@@ -3507,7 +3507,7 @@ body.theme-light .wordmark {
 }
 .stat-num {
   color: var(--ink);
-  font-family: Cormorant Garamond, serif;
+  font-family: var(--font-cormorant), serif;
   font-size: clamp(3rem, 7vw, 6rem);
   font-weight: 300;
   line-height: 1;

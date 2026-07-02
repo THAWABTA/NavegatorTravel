@@ -1344,7 +1344,7 @@ const Destinations = () => {
               fill
               priority
               quality={80}
-              unoptimized={true}
+              sizes="100vw"
               style={{ objectFit: "cover", objectPosition: "center 40%" }}
             />
           </div>

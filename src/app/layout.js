@@ -1,6 +1,20 @@
 import "./globals.css";
 import LenisProvider from "./providers/LenisProvider";
 import DebugMeasurer from "@/components/DebugMeasurer";
+import { DM_Sans, Cormorant_Garamond } from 'next/font/google';
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-sans',
+});
+
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-cormorant',
+});
 
 export const metadata = {
   metadataBase: new URL("https://yourdomain.com"), // TODO: set real production domain
@@ -41,7 +55,7 @@ export default function RootLayout({ children }) {
   };
 
   return (
-    <html lang="en">
+    <html lang="en" className={`${dmSans.variable} ${cormorant.variable}`}>
       <head>
         <script
           type="application/ld+json"
