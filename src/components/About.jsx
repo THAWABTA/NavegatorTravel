@@ -20,7 +20,7 @@ const mapPins = [
   { label: "London", top: "22%", left: "41%", labelStyle: { bottom: '100%', marginBottom: '6px', left: '50%', transform: 'translateX(-50%)' } },
   { label: "Rome", top: "31%", left: "45%", labelStyle: { bottom: '100%', marginBottom: '6px', left: '50%', transform: 'translateX(-50%)' } },
   { label: "Pristina", top: "29%", left: "50%", labelStyle: { bottom: '100%', marginBottom: '6px', left: '50%', transform: 'translateX(-50%)' } },
-  
+
   // Turkey & Caucasus
   { label: "Istanbul", top: "32%", left: "53%", labelStyle: { bottom: '100%', right: '50%', marginBottom: '6px', marginRight: '4px' } },
   { label: "Marmaris", top: "36%", left: "51%", labelStyle: { top: '100%', right: '50%', marginTop: '6px', marginRight: '4px' } },
@@ -32,7 +32,7 @@ const mapPins = [
   { label: "Tbilisi", top: "29%", left: "60%", labelStyle: { bottom: '100%', left: '50%', transform: 'translateX(-50%)', marginBottom: '6px' } },
   { label: "Yerevan", top: "31%", left: "60%", labelStyle: { top: '100%', left: '50%', transform: 'translateX(-50%)', marginTop: '6px' } },
   { label: "Baku", top: "31%", left: "62%", labelStyle: { top: '50%', left: '100%', transform: 'translateY(-50%)', marginLeft: '6px' } },
-  
+
   // Middle East & Egypt
   { label: "Beirut", top: "38%", left: "54%", labelStyle: { top: '50%', left: '100%', transform: 'translateY(-50%)', marginLeft: '6px' } },
   { label: "Cairo", top: "40%", left: "57%", labelStyle: { top: '50%', right: '100%', transform: 'translateY(-50%)', marginRight: '6px' } },
@@ -40,7 +40,7 @@ const mapPins = [
   { label: "Hurghada", top: "48%", left: "57%", labelStyle: { top: '50%', right: '100%', transform: 'translateY(-50%)', marginRight: '6px' } },
   { label: "Doha", top: "47%", left: "61%", labelStyle: { top: '50%', right: '100%', transform: 'translateY(-50%)', marginRight: '6px' } },
   { label: "Dubai", top: "48%", left: "63%", labelStyle: { top: '50%', left: '100%', transform: 'translateY(-50%)', marginLeft: '6px' } },
-  
+
   // Asia
   { label: "Maldives", top: "62%", left: "66%", labelStyle: { top: '100%', left: '50%', transform: 'translateX(-50%)', marginTop: '6px' } },
   { label: "Sri Lanka", top: "58%", left: "68%", labelStyle: { top: '100%', left: '50%', transform: 'translateX(-50%)', marginTop: '6px' } },
@@ -57,8 +57,8 @@ const mapPins = [
 
 function measureCenter(rect, originRect) {
   return {
-    x: rect.left - originRect.left + rect.width  * 0.5,
-    y: rect.top  - originRect.top  + rect.height * 0.5,
+    x: rect.left - originRect.left + rect.width * 0.5,
+    y: rect.top - originRect.top + rect.height * 0.5,
   };
 }
 
@@ -70,34 +70,34 @@ function resolveTitleNode(chapter) {
 
 function collectKnots(chapters, corridorWrap) {
   const originRect = corridorWrap.getBoundingClientRect();
-  const nodes      = chapters.map(ch => resolveTitleNode(ch));
-  const rects      = nodes.map(node => node ? node.getBoundingClientRect() : null);
-  const pts        = rects.map(r => r ? measureCenter(r, originRect) : null);
+  const nodes = chapters.map(ch => resolveTitleNode(ch));
+  const rects = nodes.map(node => node ? node.getBoundingClientRect() : null);
+  const pts = rects.map(r => r ? measureCenter(r, originRect) : null);
   return pts.every(Boolean) ? pts : null;
 }
 
 function computeKBTangentsAxis(values, h, tension) {
-  const n   = values.length;
+  const n = values.length;
   const out = new Float64Array(n);
-  const k   = (1 - tension) * 0.5;
+  const k = (1 - tension) * 0.5;
   for (let i = 1; i < n - 1; i++) {
-    const slopePrev = (values[i]     - values[i - 1]) / h[i - 1];
-    const slopeNext = (values[i + 1] - values[i])     / h[i];
+    const slopePrev = (values[i] - values[i - 1]) / h[i - 1];
+    const slopeNext = (values[i + 1] - values[i]) / h[i];
     out[i] = k * (slopePrev + slopeNext);
   }
-  out[0]     = k * 2 * (values[1]     - values[0])     / h[0];
+  out[0] = k * 2 * (values[1] - values[0]) / h[0];
   out[n - 1] = k * 2 * (values[n - 1] - values[n - 2]) / h[n - 2];
   return out;
 }
 
 function buildSplinePathD(pts, h, Tx, Ty) {
-  const n   = pts.length;
+  const n = pts.length;
   const fmt = v => v.toFixed(3);
   let d = `M ${fmt(pts[0].x)} ${fmt(pts[0].y)}`;
   for (let i = 0; i < n - 1; i++) {
-    const hi   = h[i];
-    const cp1x = pts[i].x     + (hi / 3) * Tx[i];
-    const cp1y = pts[i].y     + (hi / 3) * Ty[i];
+    const hi = h[i];
+    const cp1x = pts[i].x + (hi / 3) * Tx[i];
+    const cp1y = pts[i].y + (hi / 3) * Ty[i];
     const cp2x = pts[i + 1].x - (hi / 3) * Tx[i + 1];
     const cp2y = pts[i + 1].y - (hi / 3) * Ty[i + 1];
     d += ` C ${fmt(cp1x)} ${fmt(cp1y)}, ${fmt(cp2x)} ${fmt(cp2y)}, ${fmt(pts[i + 1].x)} ${fmt(pts[i + 1].y)}`;
@@ -131,13 +131,13 @@ const ANCHOR_STEPS = 128;
 
 function computeChapterAnchors(pts, pathElement, totalLength) {
   return pts.map((pt, i) => {
-    if (i === 0)              return 0;
+    if (i === 0) return 0;
     if (i === pts.length - 1) return 1;
     let bestFrac = 0;
     let bestDist = Infinity;
     for (let s = 0; s <= ANCHOR_STEPS; s++) {
       const frac = s / ANCHOR_STEPS;
-      const sp   = pathElement.getPointAtLength(frac * totalLength);
+      const sp = pathElement.getPointAtLength(frac * totalLength);
       const dist = (sp.x - pt.x) ** 2 + (sp.y - pt.y) ** 2;
       if (Number.isFinite(dist) && dist < bestDist) { bestDist = dist; bestFrac = frac; }
     }
@@ -146,9 +146,9 @@ function computeChapterAnchors(pts, pathElement, totalLength) {
 }
 
 function createDrawFn({ pathEl, glowEl, baseEl, totalLength, chapterAnchors, chapters }) {
-  const setDash     = gsap.quickSetter(pathEl,  'strokeDashoffset', 'px');
-  const setGlowDash = gsap.quickSetter(glowEl,  'strokeDashoffset', 'px');
-  const setBaseDash = gsap.quickSetter(baseEl,  'strokeDashoffset', 'px');
+  const setDash = gsap.quickSetter(pathEl, 'strokeDashoffset', 'px');
+  const setGlowDash = gsap.quickSetter(glowEl, 'strokeDashoffset', 'px');
+  const setBaseDash = gsap.quickSetter(baseEl, 'strokeDashoffset', 'px');
   let activeIdx = -1;
   return function draw(progress) {
     const drawLength = totalLength * progress;
@@ -162,24 +162,24 @@ function createDrawFn({ pathEl, glowEl, baseEl, totalLength, chapterAnchors, cha
     }
     if (nextIdx === activeIdx) return;
     if (activeIdx >= 0) {
-      const c     = chapters[activeIdx];
+      const c = chapters[activeIdx];
       const title = c.querySelector('.chapter-title');
-      const img   = c.querySelector('.chapter-img');
-      const card  = c.querySelector('.chapter-postcard');
+      const img = c.querySelector('.chapter-img');
+      const card = c.querySelector('.chapter-postcard');
       c.classList.remove('chapter-active');
       if (title) gsap.to(title, { color: 'var(--ink)', duration: 0.55, ease: 'power2.out' });
-      if (img)   gsap.to(img,   { filter: 'saturate(1) brightness(1)', duration: 0.6 });
-      if (card)  gsap.to(card,  { boxShadow: '0 2px 4px rgba(0,0,0,0.04),0 8px 18px rgba(0,0,0,0.08),0 28px 48px -12px rgba(0,0,0,0.18)', duration: 0.6 });
+      if (img) gsap.to(img, { filter: 'saturate(1) brightness(1)', duration: 0.6 });
+      if (card) gsap.to(card, { boxShadow: '0 2px 4px rgba(0,0,0,0.04),0 8px 18px rgba(0,0,0,0.08),0 28px 48px -12px rgba(0,0,0,0.18)', duration: 0.6 });
     }
     if (nextIdx >= 0) {
-      const c     = chapters[nextIdx];
+      const c = chapters[nextIdx];
       const title = c.querySelector('.chapter-title');
-      const img   = c.querySelector('.chapter-img');
-      const card  = c.querySelector('.chapter-postcard');
+      const img = c.querySelector('.chapter-img');
+      const card = c.querySelector('.chapter-postcard');
       c.classList.add('chapter-active');
       if (title) gsap.to(title, { color: 'var(--accent)', duration: 0.55, ease: 'power2.out' });
-      if (img)   gsap.to(img,   { filter: 'saturate(1.22) brightness(1.05)', duration: 0.6 });
-      if (card)  gsap.to(card,  { boxShadow: '0 4px 8px rgba(0,0,0,0.06),0 16px 32px rgba(0,0,0,0.12),0 40px 64px -12px rgba(0,0,0,0.26)', duration: 0.6 });
+      if (img) gsap.to(img, { filter: 'saturate(1.22) brightness(1.05)', duration: 0.6 });
+      if (card) gsap.to(card, { boxShadow: '0 4px 8px rgba(0,0,0,0.06),0 16px 32px rgba(0,0,0,0.12),0 40px 64px -12px rgba(0,0,0,0.26)', duration: 0.6 });
     }
     activeIdx = nextIdx;
   };
@@ -211,14 +211,14 @@ function buildGeometry({ corridorWrap, routeSvg, pathEl, glowEl, baseEl, chapter
 
 function createScrollTrigger({ chapters, draw }) {
   const firstTitle = resolveTitleNode(chapters[0]);
-  const lastTitle  = resolveTitleNode(chapters[chapters.length - 1]);
+  const lastTitle = resolveTitleNode(chapters[chapters.length - 1]);
   const st = ScrollTrigger.create({
-    trigger:    firstTitle,
+    trigger: firstTitle,
     endTrigger: lastTitle,
-    start:      'center bottom',
-    end:        'center top',
-    scrub:      0.15,
-    onUpdate:   self => draw(self.progress),
+    start: 'center bottom',
+    end: 'center top',
+    scrub: 0.15,
+    onUpdate: self => draw(self.progress),
   });
   draw(st.progress);
   return st;
@@ -229,34 +229,42 @@ function attachChapterAnimationsResponsive(chapters) {
   const VP = getVP();
   chapters.forEach(ch => {
     const reversed = ch.dataset.side === 'right';
-    const copy     = ch.querySelector('.chapter-copy');
+    const copy = ch.querySelector('.chapter-copy');
     const postcard = ch.querySelector('.chapter-postcard');
-    const num      = ch.querySelector('.chapter-num');
-    const img      = ch.querySelector('.chapter-img');
+    const num = ch.querySelector('.chapter-num');
+    const img = ch.querySelector('.chapter-img');
     const copyX = VP.isMobile ? 0 : VP.x(0.025, 20, 42) * (reversed ? 1 : -1);
     const copyY = VP.isMobile ? VP.y(0.015, 12, 20) : 0;
     if (copy) gsap.fromTo(copy,
       { opacity: 0, x: copyX, y: copyY },
-      { opacity: 1, x: 0, y: 0, duration: 1.1, ease: 'power4.out',
-        scrollTrigger: { trigger: ch, start: 'top 80%' } }
+      {
+        opacity: 1, x: 0, y: 0, duration: 1.1, ease: 'power4.out',
+        scrollTrigger: { trigger: ch, start: 'top 80%' }
+      }
     );
     const cardY = VP.y(0.035, 18, 52);
     const cardS = VP.isMobile ? 0.96 : 0.9;
     if (postcard) gsap.fromTo(postcard,
       { opacity: 0, y: cardY, scale: cardS },
-      { opacity: 1, y: 0, scale: 1, duration: 1.05, ease: 'power4.out', delay: 0.08,
-        scrollTrigger: { trigger: ch, start: 'top 80%' } }
+      {
+        opacity: 1, y: 0, scale: 1, duration: 1.05, ease: 'power4.out', delay: 0.08,
+        scrollTrigger: { trigger: ch, start: 'top 80%' }
+      }
     );
     if (num) gsap.fromTo(num,
       { opacity: 0 },
-      { opacity: 1, duration: 1.4, ease: 'power2.out',
-        scrollTrigger: { trigger: ch, start: 'top 84%' } }
+      {
+        opacity: 1, duration: 1.4, ease: 'power2.out',
+        scrollTrigger: { trigger: ch, start: 'top 84%' }
+      }
     );
     const imgYPct = VP.isMobile ? -4 : VP.isTablet ? -6 : -10;
     if (img) gsap.fromTo(img,
       { scale: VP.isMobile ? 1.06 : 1.15, rotate: VP.hasPerspective ? (reversed ? 2 : -2) : 0 },
-      { scale: 1, rotate: 0, yPercent: imgYPct, ease: 'none',
-        scrollTrigger: { trigger: ch, start: 'top bottom', end: 'bottom top', scrub: true } }
+      {
+        scale: 1, rotate: 0, yPercent: imgYPct, ease: 'none',
+        scrollTrigger: { trigger: ch, start: 'top bottom', end: 'bottom top', scrub: true }
+      }
     );
     if (postcard && VP.hasPointer) {
       const liftY = VP.y(0.005, 5, 10);
@@ -270,13 +278,13 @@ function attachChapterAnimationsResponsive(chapters) {
       };
       postcard.addEventListener('mouseenter', onEnter);
       postcard.addEventListener('mouseleave', onLeave);
-      postcard.addEventListener('focusin',    onEnter);
-      postcard.addEventListener('focusout',   onLeave);
+      postcard.addEventListener('focusin', onEnter);
+      postcard.addEventListener('focusout', onLeave);
       cleanups.push(() => {
         postcard.removeEventListener('mouseenter', onEnter);
         postcard.removeEventListener('mouseleave', onLeave);
-        postcard.removeEventListener('focusin',    onEnter);
-        postcard.removeEventListener('focusout',   onLeave);
+        postcard.removeEventListener('focusin', onEnter);
+        postcard.removeEventListener('focusout', onLeave);
       });
     }
   });
@@ -285,22 +293,22 @@ function attachChapterAnimationsResponsive(chapters) {
 
 function getVP() {
   const w = window.innerWidth;
-  const isMobile  = w <  768;
-  const isTablet  = w >= 768  && w < 1024;
-  const isLaptop  = w >= 1024 && w <= 1440;
-  const isDesktop = w >  1440;
+  const isMobile = w < 768;
+  const isTablet = w >= 768 && w < 1024;
+  const isLaptop = w >= 1024 && w <= 1440;
+  const isDesktop = w > 1440;
   const scale = isMobile ? 0.0 : isTablet ? 0.6 : isLaptop ? 0.8 : 1.0;
   const vw = (pct, min, max) => Math.min(Math.max(w * pct, min), max);
   return {
     w, isMobile, isTablet, isLaptop, isDesktop, scale,
-    hasPointer:     !isMobile,
+    hasPointer: !isMobile,
     hasPerspective: !isMobile && !isTablet,
-    hasMagnetic:    !isMobile,
-    hasAmbient:     !isMobile,
-    y:  (pct, min, max) => vw(pct, min, max) * scale || min,
-    x:  (pct, min, max) => vw(pct, min, max) * scale || min,
-    px: (full)           => Math.round(full * scale),
-    tiltDeg:  isMobile ? 0 : isTablet ? 0 : isLaptop ? 2.5 : 3.5,
+    hasMagnetic: !isMobile,
+    hasAmbient: !isMobile,
+    y: (pct, min, max) => vw(pct, min, max) * scale || min,
+    x: (pct, min, max) => vw(pct, min, max) * scale || min,
+    px: (full) => Math.round(full * scale),
+    tiltDeg: isMobile ? 0 : isTablet ? 0 : isLaptop ? 2.5 : 3.5,
     floatAmp: (base) => isMobile ? 0 : isTablet ? base * 0.5 : base * scale,
   };
 }
@@ -323,7 +331,7 @@ const About = () => {
     });
 
     const initText = async () => {
-      try { await document.fonts.ready; } catch (_) {}
+      try { await document.fonts.ready; } catch (_) { }
       await new Promise(r => requestAnimationFrame(r));
 
       // TIER 1 — HEADINGS: clip-path line reveal
@@ -399,7 +407,7 @@ const About = () => {
     initText();
 
     return () => {
-      splits.forEach(s => { try { s.revert(); } catch (_) {} });
+      splits.forEach(s => { try { s.revert(); } catch (_) { } });
       root.querySelectorAll('[data-text-ready]').forEach(el => {
         delete el.dataset.textReady;
       });
@@ -413,11 +421,13 @@ const About = () => {
 
     rootRef.current.querySelectorAll('.manifesto-media-img').forEach(el => {
       const scaleFrom = VP.isMobile ? 1.06 : VP.isTablet ? 1.08 : 1.15;
-      const yFrom     = VP.isMobile ? -3   : VP.isTablet ? -5   : -8;
+      const yFrom = VP.isMobile ? -3 : VP.isTablet ? -5 : -8;
       gsap.fromTo(el,
         { scale: scaleFrom, yPercent: yFrom },
-        { scale: 1, yPercent: 0, ease: 'none',
-          scrollTrigger: { trigger: el.closest('.manifesto-media-wrap'), start: 'top bottom', end: 'bottom top', scrub: true } }
+        {
+          scale: 1, yPercent: 0, ease: 'none',
+          scrollTrigger: { trigger: el.closest('.manifesto-media-wrap'), start: 'top bottom', end: 'bottom top', scrub: true }
+        }
       );
     });
 
@@ -425,39 +435,43 @@ const About = () => {
       const inset = VP.isMobile ? '3% 2% 3% 2%' : VP.isTablet ? '4% 3% 4% 3%' : '6% 6% 6% 6%';
       gsap.fromTo(el,
         { clipPath: `inset(${inset})`, opacity: 0 },
-        { clipPath: 'inset(0% 0% 0% 0%)', opacity: 1, duration: 1.4, ease: 'power3.inOut',
-          scrollTrigger: { trigger: el, start: 'top 78%' } }
+        {
+          clipPath: 'inset(0% 0% 0% 0%)', opacity: 1, duration: 1.4, ease: 'power3.inOut',
+          scrollTrigger: { trigger: el, start: 'top 78%' }
+        }
       );
     });
 
     rootRef.current.querySelectorAll('.philosophy-item').forEach((el, i) => {
-      const num  = el.querySelector('.philosophy-num');
+      const num = el.querySelector('.philosophy-num');
       const rule = el.querySelector('.philosophy-rule');
       const yOff = VP.y(0.02, 12, 30);
       gsap.fromTo(el,
         { opacity: 0, y: yOff },
-        { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
-          delay: i * 0.08, scrollTrigger: { trigger: el, start: 'top 88%' } }
+        {
+          opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
+          delay: i * 0.08, scrollTrigger: { trigger: el, start: 'top 88%' }
+        }
       );
       if (!VP.hasPointer) return;
       const handleEnter = () => {
         gsap.to(num, { WebkitTextStroke: '1px var(--accent)', color: 'var(--accent)', duration: 0.5, ease: 'power2.out', overwrite: 'auto' });
-        gsap.to(el,  { x: VP.x(0.005, 5, 9), duration: 0.5, ease: 'power2.out', overwrite: 'auto' });
+        gsap.to(el, { x: VP.x(0.005, 5, 9), duration: 0.5, ease: 'power2.out', overwrite: 'auto' });
         if (rule) gsap.to(rule, { width: '3rem', duration: 0.5, ease: 'power2.out', overwrite: 'auto' });
       };
       const handleLeave = () => {
         gsap.to(num, { WebkitTextStroke: '1px var(--gold-soft)', color: 'transparent', duration: 0.5, ease: 'power2.out', overwrite: 'auto' });
-        gsap.to(el,  { x: 0, duration: 0.5, ease: 'power2.out', overwrite: 'auto' });
+        gsap.to(el, { x: 0, duration: 0.5, ease: 'power2.out', overwrite: 'auto' });
         if (rule) gsap.to(rule, { width: '0rem', duration: 0.5, ease: 'power2.out', overwrite: 'auto' });
       };
       el.addEventListener('mouseenter', handleEnter);
       el.addEventListener('mouseleave', handleLeave);
-      el.addEventListener('focusin',  handleEnter);
+      el.addEventListener('focusin', handleEnter);
       el.addEventListener('focusout', handleLeave);
       cleanupFns.push(() => {
         el.removeEventListener('mouseenter', handleEnter);
         el.removeEventListener('mouseleave', handleLeave);
-        el.removeEventListener('focusin',  handleEnter);
+        el.removeEventListener('focusin', handleEnter);
         el.removeEventListener('focusout', handleLeave);
       });
     });
@@ -466,24 +480,24 @@ const About = () => {
     if (!corridorWrap) return;
 
     const routeSvg = corridorWrap.querySelector('.route-svg');
-    const pathEl   = corridorWrap.querySelector('.route-path');
-    const glowEl   = corridorWrap.querySelector('.route-path-glow');
-    const baseEl   = corridorWrap.querySelector('.route-path-base');
+    const pathEl = corridorWrap.querySelector('.route-path');
+    const glowEl = corridorWrap.querySelector('.route-path-glow');
+    const baseEl = corridorWrap.querySelector('.route-path-base');
     const chapters = Array.from(corridorWrap.querySelectorAll('.journey-chapter'));
 
     const isDesktop = () => window.matchMedia('(min-width: 1024px)').matches;
-    const noMotion  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (!routeSvg || !pathEl || !glowEl || !baseEl || noMotion || chapters.length < 2) return;
 
     let currentProgress = 0;
-    let draw            = null;
-    let st              = null;
-    let ro              = null;
-    let initAborted     = false;
+    let draw = null;
+    let st = null;
+    let ro = null;
+    let initAborted = false;
 
     const init = async () => {
-      try { await document.fonts.ready; } catch (_) {}
+      try { await document.fonts.ready; } catch (_) { }
       if (initAborted) return;
       await Promise.all(
         Array.from(corridorWrap.querySelectorAll('.chapter-img')).map(img =>
@@ -545,16 +559,20 @@ const About = () => {
     rootRef.current.querySelectorAll('.exp-card').forEach((el, i) => {
       gsap.fromTo(el,
         { opacity: 0, y: 60 },
-        { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out',
-          delay: i * 0.1, scrollTrigger: { trigger: el, start: 'top 90%' } }
+        {
+          opacity: 1, y: 0, duration: 1.0, ease: 'power3.out',
+          delay: i * 0.1, scrollTrigger: { trigger: el, start: 'top 90%' }
+        }
       );
     });
 
     rootRef.current.querySelectorAll('.map-pin').forEach((el, i) => {
       gsap.fromTo(el,
         { scale: 0, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.6, ease: 'back.out(2)',
-          delay: i * 0.05, scrollTrigger: { trigger: el.closest('.map-section'), start: 'top 75%' } }
+        {
+          scale: 1, opacity: 1, duration: 0.6, ease: 'back.out(2)',
+          delay: i * 0.05, scrollTrigger: { trigger: el.closest('.map-section'), start: 'top 75%' }
+        }
       );
     });
 
@@ -562,8 +580,10 @@ const About = () => {
     if (ctaScene) {
       gsap.fromTo(ctaScene,
         { opacity: 0, scale: 0.98 },
-        { opacity: 1, scale: 1, duration: 1.2, ease: 'power3.out',
-          scrollTrigger: { trigger: ctaScene, start: 'top 85%' } }
+        {
+          opacity: 1, scale: 1, duration: 1.2, ease: 'power3.out',
+          scrollTrigger: { trigger: ctaScene, start: 'top 85%' }
+        }
       );
     }
   }, { scope: rootRef });
@@ -576,23 +596,23 @@ const About = () => {
     if (noMotion) return;
 
     const M = {
-      micro:  { min: 3.0,  max: 8.0  },
-      hover:  { fast: 0.35, mid: 0.45, slow: 0.55 },
-      reveal: { fast: 0.8,  mid: 1.1,  slow: 1.4  },
-      scene:  { fast: 1.2,  mid: 1.6,  slow: 2.0  },
+      micro: { min: 3.0, max: 8.0 },
+      hover: { fast: 0.35, mid: 0.45, slow: 0.55 },
+      reveal: { fast: 0.8, mid: 1.1, slow: 1.4 },
+      scene: { fast: 1.2, mid: 1.6, slow: 2.0 },
     };
 
     const E = {
-      entry:     'power4.out',
-      exit:      'power3.in',
-      settle:    'expo.out',
-      spring:    'back.out(1.8)',
+      entry: 'power4.out',
+      exit: 'power3.in',
+      settle: 'expo.out',
+      spring: 'back.out(1.8)',
       cinematic: 'power3.inOut',
-      ambient:   'sine.inOut',
+      ambient: 'sine.inOut',
     };
 
-    const seed   = (i, salt = 0) => ((i * 2654435761 + salt * 40503) >>> 0) / 0xffffffff;
-    const lerp   = (a, b, t) => a + (b - a) * t;
+    const seed = (i, salt = 0) => ((i * 2654435761 + salt * 40503) >>> 0) / 0xffffffff;
+    const lerp = (a, b, t) => a + (b - a) * t;
     const jitter = (i, salt, lo, hi) => lerp(lo, hi, seed(i, salt));
 
     const luxCleanups = [];
@@ -629,22 +649,22 @@ const About = () => {
       const items = Array.from(root.querySelectorAll('.philosophy-item'));
       if (!items.length) return;
       items.forEach((el, i) => {
-        const num   = el.querySelector('.philosophy-num');
-        const icon  = el.querySelector('svg');
+        const num = el.querySelector('.philosophy-num');
+        const icon = el.querySelector('svg');
         const title = el.querySelector('.philosophy-title');
-        const desc  = el.querySelector('p');
-        const rule  = el.querySelector('.philosophy-rule');
-        const yOff  = jitter(i, 1, 22, 55);
+        const desc = el.querySelector('p');
+        const rule = el.querySelector('.philosophy-rule');
+        const yOff = jitter(i, 1, 22, 55);
         const delay = jitter(i, 2, 0, 0.22);
-        const dur   = jitter(i, 3, M.reveal.fast, M.reveal.slow);
+        const dur = jitter(i, 3, M.reveal.fast, M.reveal.slow);
         const itemTl = gsap.timeline({
           scrollTrigger: { trigger: el, start: 'top 87%', toggleActions: 'play none none none' },
           defaults: { ease: E.entry },
         });
-        if (num)   itemTl.fromTo(num,   { opacity: 0, y: yOff * 0.6 },              { opacity: 1, y: 0, duration: dur }, delay);
-        if (icon)  itemTl.fromTo(icon,  { opacity: 0, scale: 0.82, y: yOff * 0.4 }, { opacity: 1, scale: 1, y: 0, duration: M.hover.slow, ease: E.spring }, delay + 0.1);
-        if (title) itemTl.fromTo(title, { opacity: 0, y: yOff * 0.3 },              { opacity: 1, y: 0, duration: M.reveal.mid }, delay + 0.18);
-        if (desc)  itemTl.fromTo(desc,  { opacity: 0, y: yOff * 0.2 },              { opacity: 1, y: 0, duration: M.reveal.fast }, delay + 0.28);
+        if (num) itemTl.fromTo(num, { opacity: 0, y: yOff * 0.6 }, { opacity: 1, y: 0, duration: dur }, delay);
+        if (icon) itemTl.fromTo(icon, { opacity: 0, scale: 0.82, y: yOff * 0.4 }, { opacity: 1, scale: 1, y: 0, duration: M.hover.slow, ease: E.spring }, delay + 0.1);
+        if (title) itemTl.fromTo(title, { opacity: 0, y: yOff * 0.3 }, { opacity: 1, y: 0, duration: M.reveal.mid }, delay + 0.18);
+        if (desc) itemTl.fromTo(desc, { opacity: 0, y: yOff * 0.2 }, { opacity: 1, y: 0, duration: M.reveal.fast }, delay + 0.28);
         if (icon) {
           gsap.to(icon, {
             scale: jitter(i, 5, 1.04, 1.09),
@@ -655,26 +675,26 @@ const About = () => {
           });
         }
         const handleEnter = () => {
-          gsap.to(el,   { x: 10, duration: M.hover.mid, ease: E.settle, overwrite: 'auto' });
-          if (num)  gsap.to(num,  { WebkitTextStroke: '1px var(--accent)', color: 'var(--accent)', duration: M.hover.mid, ease: E.settle, overwrite: 'auto' });
+          gsap.to(el, { x: 10, duration: M.hover.mid, ease: E.settle, overwrite: 'auto' });
+          if (num) gsap.to(num, { WebkitTextStroke: '1px var(--accent)', color: 'var(--accent)', duration: M.hover.mid, ease: E.settle, overwrite: 'auto' });
           if (icon) gsap.to(icon, { scale: 1.14, color: 'var(--accent)', duration: M.hover.fast, ease: E.spring, overwrite: 'auto' });
           if (rule) gsap.to(rule, { width: '3rem', duration: M.hover.mid, ease: E.settle, overwrite: 'auto' });
         };
         const handleLeave = () => {
-          gsap.to(el,   { x: 0, duration: M.hover.slow, ease: E.settle, overwrite: 'auto' });
-          if (num)  gsap.to(num,  { WebkitTextStroke: '1px var(--gold-soft)', color: 'transparent', duration: M.hover.slow, ease: E.settle, overwrite: 'auto' });
+          gsap.to(el, { x: 0, duration: M.hover.slow, ease: E.settle, overwrite: 'auto' });
+          if (num) gsap.to(num, { WebkitTextStroke: '1px var(--gold-soft)', color: 'transparent', duration: M.hover.slow, ease: E.settle, overwrite: 'auto' });
           if (icon) gsap.to(icon, { scale: 1, duration: M.hover.slow, ease: E.settle, overwrite: 'auto' });
           if (rule) gsap.to(rule, { width: '0rem', duration: M.hover.mid, ease: E.settle, overwrite: 'auto' });
         };
         el.addEventListener('mouseenter', handleEnter);
         el.addEventListener('mouseleave', handleLeave);
-        el.addEventListener('focusin',    handleEnter);
-        el.addEventListener('focusout',   handleLeave);
+        el.addEventListener('focusin', handleEnter);
+        el.addEventListener('focusout', handleLeave);
         luxCleanups.push(() => {
           el.removeEventListener('mouseenter', handleEnter);
           el.removeEventListener('mouseleave', handleLeave);
-          el.removeEventListener('focusin',    handleEnter);
-          el.removeEventListener('focusout',   handleLeave);
+          el.removeEventListener('focusin', handleEnter);
+          el.removeEventListener('focusout', handleLeave);
         });
       });
     })();
@@ -697,7 +717,7 @@ const About = () => {
 
       chapters.forEach((ch, ci) => {
         const postcard = ch.querySelector('.chapter-postcard');
-        const img      = ch.querySelector('.chapter-img');
+        const img = ch.querySelector('.chapter-img');
         if (!postcard) return;
         const floatAmp = jitter(ci, 10, 2, 4.5);
         const floatDur = jitter(ci, 11, M.micro.min + 0.2, M.micro.min + 2.8);
@@ -711,8 +731,8 @@ const About = () => {
           if (!isTicking) {
             window.requestAnimationFrame(() => {
               const rect = postcard.getBoundingClientRect();
-              const cx   = (e.clientX - rect.left - rect.width  * 0.5) / (rect.width  * 0.5);
-              const cy   = (e.clientY - rect.top  - rect.height * 0.5) / (rect.height * 0.5);
+              const cx = (e.clientX - rect.left - rect.width * 0.5) / (rect.width * 0.5);
+              const cy = (e.clientY - rect.top - rect.height * 0.5) / (rect.height * 0.5);
               if (img) gsap.to(img, { x: cx * -6, y: cy * -4, scale: 1.06, duration: M.hover.slow, ease: E.settle, overwrite: 'auto' });
               gsap.to(postcard, {
                 rotateX: -cy * 3, rotateY: cx * 3,
@@ -737,40 +757,40 @@ const About = () => {
           });
         };
         postcard.style.willChange = 'transform';
-        postcard.addEventListener('mousemove',  handleMove);
+        postcard.addEventListener('mousemove', handleMove);
         postcard.addEventListener('mouseleave', handleLeave);
         luxCleanups.push(() => {
-          postcard.removeEventListener('mousemove',  handleMove);
+          postcard.removeEventListener('mousemove', handleMove);
           postcard.removeEventListener('mouseleave', handleLeave);
         });
       });
 
       chapters.forEach(ch => {
-        const btn  = ch.querySelector('.chapter-btn');
+        const btn = ch.querySelector('.chapter-btn');
         const icon = btn?.querySelector('svg');
         if (!btn) return;
         const handleEnter = () => {
-          gsap.to(btn,  { scale: 1.03, duration: M.hover.fast, ease: 'back.out(2.2)', overwrite: 'auto' });
+          gsap.to(btn, { scale: 1.03, duration: M.hover.fast, ease: 'back.out(2.2)', overwrite: 'auto' });
           if (icon) gsap.to(icon, { x: 4, duration: M.hover.mid, ease: E.entry, overwrite: 'auto' });
         };
         const handleLeave = () => {
-          gsap.to(btn,  { scale: 1, duration: M.hover.slow, ease: E.settle, overwrite: 'auto' });
+          gsap.to(btn, { scale: 1, duration: M.hover.slow, ease: E.settle, overwrite: 'auto' });
           if (icon) gsap.to(icon, { x: 0, duration: M.hover.slow, ease: E.settle, overwrite: 'auto' });
         };
         const handleDown = () => gsap.to(btn, { scale: 0.97, duration: 0.12, ease: 'power2.in', overwrite: 'auto' });
-        const handleUp   = () => {
+        const handleUp = () => {
           gsap.to(btn, { scale: 1.04, duration: 0.22, ease: 'back.out(3)', overwrite: 'auto' });
           setTimeout(() => gsap.to(btn, { scale: 1, duration: M.hover.mid, ease: E.settle, overwrite: 'auto' }), 180);
         };
-        btn.addEventListener('mouseenter',  handleEnter);
-        btn.addEventListener('mouseleave',  handleLeave);
-        btn.addEventListener('mousedown',   handleDown);
-        btn.addEventListener('mouseup',     handleUp);
+        btn.addEventListener('mouseenter', handleEnter);
+        btn.addEventListener('mouseleave', handleLeave);
+        btn.addEventListener('mousedown', handleDown);
+        btn.addEventListener('mouseup', handleUp);
         luxCleanups.push(() => {
-          btn.removeEventListener('mouseenter',  handleEnter);
-          btn.removeEventListener('mouseleave',  handleLeave);
-          btn.removeEventListener('mousedown',   handleDown);
-          btn.removeEventListener('mouseup',     handleUp);
+          btn.removeEventListener('mouseenter', handleEnter);
+          btn.removeEventListener('mouseleave', handleLeave);
+          btn.removeEventListener('mousedown', handleDown);
+          btn.removeEventListener('mouseup', handleUp);
         });
       });
 
@@ -778,29 +798,29 @@ const About = () => {
       const chapterObserver = new MutationObserver((mutations) => {
         mutations.forEach(m => {
           if (m.type !== 'attributes' || m.attributeName !== 'class') return;
-          const ch          = m.target;
+          const ch = m.target;
           const isNowActive = ch.classList.contains('chapter-active');
-          const chIdx       = chapters.indexOf(ch);
+          const chIdx = chapters.indexOf(ch);
           if (chIdx === -1) return;
           if (isNowActive && chIdx !== luxActiveIdx) {
             luxActiveIdx = chIdx;
-            const num  = ch.querySelector('.chapter-num');
-            const btn  = ch.querySelector('.chapter-btn');
+            const num = ch.querySelector('.chapter-num');
+            const btn = ch.querySelector('.chapter-btn');
             const card = ch.querySelector('.chapter-postcard');
-            const img  = ch.querySelector('.chapter-img');
+            const img = ch.querySelector('.chapter-img');
             const arrivalTl = gsap.timeline({ defaults: { ease: E.settle } });
-            if (img)  arrivalTl.to(img,  { filter: 'saturate(1.4) brightness(1.12)', duration: M.hover.fast }, 0);
-            if (img)  arrivalTl.to(img,  { filter: 'saturate(1.22) brightness(1.05)', duration: M.reveal.mid }, M.hover.fast);
-            if (num)  arrivalTl.to(num,  { WebkitTextStroke: '1px var(--accent)', duration: M.hover.slow, ease: E.entry }, 0.05);
+            if (img) arrivalTl.to(img, { filter: 'saturate(1.4) brightness(1.12)', duration: M.hover.fast }, 0);
+            if (img) arrivalTl.to(img, { filter: 'saturate(1.22) brightness(1.05)', duration: M.reveal.mid }, M.hover.fast);
+            if (num) arrivalTl.to(num, { WebkitTextStroke: '1px var(--accent)', duration: M.hover.slow, ease: E.entry }, 0.05);
             if (card) arrivalTl.to(card, { boxShadow: '0 6px 12px rgba(0,0,0,0.07), 0 20px 40px rgba(0,0,0,0.14), 0 48px 72px -10px rgba(0,0,0,0.28)', y: -4, duration: M.reveal.mid, ease: E.spring }, 0.1);
-            if (btn)  arrivalTl.to(btn,  { borderColor: 'var(--accent)', color: 'var(--accent)', duration: M.hover.slow }, 0.18);
+            if (btn) arrivalTl.to(btn, { borderColor: 'var(--accent)', color: 'var(--accent)', duration: M.hover.slow }, 0.18);
           } else if (!isNowActive) {
-            const num  = ch.querySelector('.chapter-num');
-            const btn  = ch.querySelector('.chapter-btn');
+            const num = ch.querySelector('.chapter-num');
+            const btn = ch.querySelector('.chapter-btn');
             const card = ch.querySelector('.chapter-postcard');
             const departureTl = gsap.timeline({ defaults: { ease: 'power2.out' } });
-            if (num)  departureTl.to(num,  { WebkitTextStroke: '1px var(--gold-soft)', duration: M.hover.slow }, 0);
-            if (btn)  departureTl.to(btn,  { borderColor: 'var(--line)', color: 'var(--ink)', duration: M.hover.mid }, 0);
+            if (num) departureTl.to(num, { WebkitTextStroke: '1px var(--gold-soft)', duration: M.hover.slow }, 0);
+            if (btn) departureTl.to(btn, { borderColor: 'var(--line)', color: 'var(--ink)', duration: M.hover.mid }, 0);
             if (card) departureTl.to(card, { boxShadow: '0 2px 4px rgba(0,0,0,0.04), 0 8px 18px rgba(0,0,0,0.08), 0 28px 48px -12px rgba(0,0,0,0.18)', y: 0, duration: M.hover.slow }, 0);
           }
         });
@@ -814,9 +834,9 @@ const About = () => {
       const pins = Array.from(root.querySelectorAll('.map-pin'));
       if (!pins.length) return;
       pins.forEach((el, i) => {
-        const dot   = el.querySelector('span:first-child');
+        const dot = el.querySelector('span:first-child');
         const label = el.querySelector('span:last-child');
-        const popDur     = jitter(i, 20, 0.24, 0.34);
+        const popDur = jitter(i, 20, 0.24, 0.34);
         const entryDelay = i * jitter(i, 21, 0.055, 0.09);
         const entryTl = gsap.timeline({
           delay: entryDelay,
@@ -825,12 +845,13 @@ const About = () => {
         entryTl
           .fromTo(el, { scale: 0, opacity: 0, y: 6 }, { scale: 1.28, opacity: 1, y: 0, duration: popDur, ease: E.entry })
           .to(el, { scale: 0.86, duration: popDur * 0.55, ease: 'power2.in' })
-          .to(el, { scale: 1.0,  duration: popDur * 0.75, ease: E.spring });
+          .to(el, { scale: 1.0, duration: popDur * 0.75, ease: E.spring });
         if (label) entryTl.fromTo(label, { opacity: 0, y: 4 }, { opacity: 1, y: 0, duration: M.hover.mid, ease: E.settle }, '-=0.15');
         if (dot) {
           const pulseDur = jitter(i, 22, 1.0, 2.0);
           const pulseDel = entryDelay + popDur * 2 + jitter(i, 23, 0, 1.5);
-          ScrollTrigger.create({ trigger: el.closest('.map-section'), start: 'top 78%', once: true,
+          ScrollTrigger.create({
+            trigger: el.closest('.map-section'), start: 'top 78%', once: true,
             onEnter: () => {
               gsap.to(dot, {
                 scale: jitter(i, 24, 1.4, 1.7), opacity: jitter(i, 25, 0.45, 0.65),
@@ -860,12 +881,12 @@ const About = () => {
       }
       root.querySelectorAll('.contact-input').forEach(input => {
         const handleFocus = () => gsap.to(input, { y: -3, duration: M.hover.fast, ease: E.entry, overwrite: 'auto' });
-        const handleBlur  = () => gsap.to(input, { y: 0,  duration: M.hover.slow, ease: E.settle, overwrite: 'auto' });
+        const handleBlur = () => gsap.to(input, { y: 0, duration: M.hover.slow, ease: E.settle, overwrite: 'auto' });
         input.addEventListener('focus', handleFocus);
-        input.addEventListener('blur',  handleBlur);
+        input.addEventListener('blur', handleBlur);
         luxCleanups.push(() => {
           input.removeEventListener('focus', handleFocus);
-          input.removeEventListener('blur',  handleBlur);
+          input.removeEventListener('blur', handleBlur);
         });
       });
       const submitBtn = root.querySelector('.contact-submit-btn');
@@ -876,8 +897,8 @@ const About = () => {
           if (!isTickingBtn) {
             window.requestAnimationFrame(() => {
               const rect = submitBtn.getBoundingClientRect();
-              const cx   = (e.clientX - rect.left - rect.width  * 0.5) * 0.14;
-              const cy   = (e.clientY - rect.top  - rect.height * 0.5) * 0.14;
+              const cx = (e.clientX - rect.left - rect.width * 0.5) * 0.14;
+              const cy = (e.clientY - rect.top - rect.height * 0.5) * 0.14;
               gsap.to(submitBtn, { x: cx, y: cy, duration: M.hover.mid, ease: E.entry, overwrite: 'auto' });
               if (icon) gsap.to(icon, { x: 4, duration: M.hover.mid, ease: E.entry, overwrite: 'auto' });
               isTickingBtn = false;
@@ -890,19 +911,19 @@ const About = () => {
           if (icon) gsap.to(icon, { x: 0, duration: M.hover.slow, ease: E.settle, overwrite: 'auto' });
         };
         const handleDown = () => gsap.to(submitBtn, { scale: 0.97, duration: 0.12, ease: 'power2.in', overwrite: 'auto' });
-        const handleUp   = () => {
+        const handleUp = () => {
           gsap.to(submitBtn, { scale: 1.03, duration: 0.2, ease: 'back.out(2)', overwrite: 'auto' });
           setTimeout(() => gsap.to(submitBtn, { scale: 1, duration: M.hover.mid, ease: E.settle, overwrite: 'auto' }), 150);
         };
-        submitBtn.addEventListener('mousemove',  handleMove);
+        submitBtn.addEventListener('mousemove', handleMove);
         submitBtn.addEventListener('mouseleave', handleLeave);
-        submitBtn.addEventListener('mousedown',  handleDown);
-        submitBtn.addEventListener('mouseup',    handleUp);
+        submitBtn.addEventListener('mousedown', handleDown);
+        submitBtn.addEventListener('mouseup', handleUp);
         luxCleanups.push(() => {
-          submitBtn.removeEventListener('mousemove',  handleMove);
+          submitBtn.removeEventListener('mousemove', handleMove);
           submitBtn.removeEventListener('mouseleave', handleLeave);
-          submitBtn.removeEventListener('mousedown',  handleDown);
-          submitBtn.removeEventListener('mouseup',    handleUp);
+          submitBtn.removeEventListener('mousedown', handleDown);
+          submitBtn.removeEventListener('mouseup', handleUp);
         });
       }
     })();
@@ -913,7 +934,8 @@ const About = () => {
       if (!footer) return;
       const brand = footer.querySelector('[data-text-eyebrow]');
       if (brand) {
-        ScrollTrigger.create({ trigger: footer, start: 'top bottom', once: true,
+        ScrollTrigger.create({
+          trigger: footer, start: 'top bottom', once: true,
           onEnter: () => {
             gsap.to(brand, {
               opacity: 0.6,
@@ -924,15 +946,15 @@ const About = () => {
         });
       }
       footer.querySelectorAll('a').forEach((link) => {
-        link.style.position           = 'relative';
-        link.style.display            = 'inline-block';
-        link.style.backgroundImage    = 'linear-gradient(var(--accent), var(--accent))';
-        link.style.backgroundRepeat   = 'no-repeat';
+        link.style.position = 'relative';
+        link.style.display = 'inline-block';
+        link.style.backgroundImage = 'linear-gradient(var(--accent), var(--accent))';
+        link.style.backgroundRepeat = 'no-repeat';
         link.style.backgroundPosition = 'left bottom 0px';
-        link.style.backgroundSize     = '0% 1px';
+        link.style.backgroundSize = '0% 1px';
         const handleEnter = (e) => {
           window.requestAnimationFrame(() => {
-            const rect     = link.getBoundingClientRect();
+            const rect = link.getBoundingClientRect();
             const fromLeft = e.clientX < rect.left + rect.width * 0.5;
             gsap.set(link, { backgroundPositionX: fromLeft ? '0%' : '100%' });
             gsap.to(link, { backgroundSize: '100% 1px', duration: M.hover.mid, ease: E.settle, overwrite: 'auto' });
@@ -1001,7 +1023,7 @@ const About = () => {
             <span className="why-fly-rule hidden lg:block w-[1px] flex-1" style={{ background: 'var(--line)' }} />
           </div>
           <div className="lg:col-span-8 lg:col-start-3 flex flex-col gap-6">
-            <p data-text-eyebrow className="eyebrow text-[var(--ink-faint)]">Why We Fly</p>
+            <p data-text-eyebrow className="eyebrow text-[var(--ink-faint)]">Why We Travel</p>
             <p data-text-heading className="display-font text-[clamp(2rem,5vw,4rem)] font-light italic leading-[1.15] text-[var(--ink)]">
               Some destinations are discovered. <span style={{ color: 'var(--accent)' }}>Others are felt.</span>
             </p>
@@ -1015,9 +1037,9 @@ const About = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-b" style={{ borderColor: 'var(--line)' }}>
             {[
               { num: '01', title: 'Honeymoon', desc: 'Every itinerary is composed, never templated — built around what moves you.' },
-              { num: '02', title: 'Leisure Travel',      desc: 'Doors that stay closed to the public open quietly, simply because we ask.' },
-              { num: '03', title: 'Family Travel',   desc: 'Every transfer, stay, and arrival timed so the only thing you notice is the view.' },
-              { num: '04', title: 'Solo Travel',  desc: 'One dedicated voice, available before, during, and long after you return.' },
+              { num: '02', title: 'Leisure Travel', desc: 'Doors that stay closed to the public open quietly, simply because we ask.' },
+              { num: '03', title: 'Family Travel', desc: 'Every transfer, stay, and arrival timed so the only thing you notice is the view.' },
+              { num: '04', title: 'Solo Travel', desc: 'One dedicated voice, available before, during, and long after you return.' },
             ].map((item) => (
               <div
                 key={item.num}
@@ -1077,7 +1099,7 @@ const About = () => {
             </defs>
             <path className="route-path-base" fill="none" stroke="#FF8A2A" strokeWidth="1" strokeLinecap="round" strokeOpacity="0.07" style={{ willChange: 'stroke-dashoffset' }} />
             <path className="route-path-glow" fill="none" stroke="#FF8A2A" strokeWidth="10" strokeLinecap="round" strokeOpacity="0.12" style={{ filter: 'url(#routeGlow)', willChange: 'stroke-dashoffset' }} />
-            <path className="route-path"      fill="none" stroke="#FF8A2A" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="1"    style={{ willChange: 'stroke-dashoffset' }} />
+            <path className="route-path" fill="none" stroke="#FF8A2A" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="1" style={{ willChange: 'stroke-dashoffset' }} />
           </svg>
 
           {[...featuredDestinations, ...secondaryDestinations].map((d, i) => {
@@ -1158,13 +1180,13 @@ const About = () => {
             <div className="flex flex-col gap-3">
               <span data-text-eyebrow className="eyebrow text-[var(--ink-faint)]">Explore</span>
               <a href="#destinations" className="text-xs text-[var(--ink-soft)] hover:text-[var(--accent)] transition-colors">Destinations</a>
-              <a href="#experiences"  className="text-xs text-[var(--ink-soft)] hover:text-[var(--accent)] transition-colors">Experiences</a>
-              <a href="#about"        className="text-xs text-[var(--ink-soft)] hover:text-[var(--accent)] transition-colors">About</a>
-              <a href="#"             className="text-xs text-[var(--ink-soft)] hover:text-[var(--accent)] transition-colors">Journal</a>
+              <a href="#experiences" className="text-xs text-[var(--ink-soft)] hover:text-[var(--accent)] transition-colors">Experiences</a>
+              <a href="#about" className="text-xs text-[var(--ink-soft)] hover:text-[var(--accent)] transition-colors">About</a>
+              <a href="#" className="text-xs text-[var(--ink-soft)] hover:text-[var(--accent)] transition-colors">Journal</a>
             </div>
             <div className="flex flex-col gap-3">
               <span data-text-eyebrow className="eyebrow text-[var(--ink-faint)]">Contact</span>
-              <a href="tel:065510330"                   className="text-xs text-[var(--ink-soft)] hover:text-[var(--accent)] transition-colors">065510330</a>
+              <a href="tel:065510330" className="text-xs text-[var(--ink-soft)] hover:text-[var(--accent)] transition-colors">065510330</a>
               <a href="mailto:info@navigatortravel-jo.com" className="text-xs text-[var(--ink-soft)] hover:text-[var(--accent)] transition-colors">info@navigatortravel-jo.com</a>
             </div>
           </div>
