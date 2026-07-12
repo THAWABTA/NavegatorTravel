@@ -1,6 +1,6 @@
 import "./globals.css";
 import LenisProvider from "./providers/LenisProvider";
-import DebugMeasurer from "@/components/DebugMeasurer";
+
 import { Open_Sans } from 'next/font/google';
 
 const openSans = Open_Sans({
@@ -58,7 +58,6 @@ export default function RootLayout({ children }) {
       <body className="antialiased">
         <LenisProvider>
           {children}
-          <DebugMeasurer />
         </LenisProvider>
       </body>
     </html>
